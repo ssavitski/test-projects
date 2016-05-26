@@ -6,15 +6,27 @@ import {ShoppingListService} from './shopping-list.service';
 @Component({
   template: require('./shopping-list.template.html'),
   directives: [ShoppingListEditComponent],
-  providers: [ShoppingListService]
+  providers: [ShoppingListService],
+  styleUrls: ['./assets/css/shopping-list.component.css']
 })
 
 export class ShoppingListComponent implements OnInit {
   shoppingList: Ingredient[];
   selectedItem: Ingredient = null;
+  activeState: number = null;
 
   constructor(private _ShoppingListService: ShoppingListService) {
 
+  }
+
+  onAddItem() {
+    this.selectedItem = null;
+    this.activeState = null;
+  }
+
+  onSelectItem(item: Ingredient) {
+    this.selectedItem = item;
+    this.activeState = item.id;
   }
 
   ngOnInit():any {

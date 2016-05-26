@@ -20,7 +20,7 @@ export class ShoppingListService {
   }
 
   getItem(index: number) {
-    return this.http.get(`${this.url}:${index}`)
+    return this.http.get(`${this.url}/:${index}`)
       .map(res => res.json());
   }
 
@@ -50,7 +50,7 @@ export class ShoppingListService {
       'Content-Type': 'application/json'});
 
     return this.http
-      .delete(`${this.url}:${index}`, headers)
+      .delete(`${this.url}/${index}`, headers)
       .toPromise()
       .catch(error => console.error('Error: ' + error));
   }
@@ -60,7 +60,7 @@ export class ShoppingListService {
       'Content-Type': 'application/json'});
 
     return this.http
-      .put(`${this.url}:${index}`,
+      .put(`${this.url}/${index}`,
            JSON.stringify(item),
            {headers: headers})
       .toPromise()

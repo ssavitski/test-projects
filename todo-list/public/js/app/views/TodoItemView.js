@@ -23,6 +23,11 @@ define([
           throw new Error("model for TodoItemView is not specified.");
         }
 
+        this.$el.attr("id", options.model.cid);
+        if (options.model.get("completed")) {
+          this.$el.addClass("list-group-item-warning");
+        }
+
         // Calls the view's render method
         this.render();
 
@@ -30,13 +35,17 @@ define([
 
       // TodoItemView Event Handlers
       events: {
-        "change .task-status": "changeStatus"
+        "change .task-status": "changeStatus",
+        "click .removeItem": "removeTodoItem"
       },
 
       changeStatus: function() {
         this.model.toggle();
-        this.$el.toggleClass("list-group-item-warning", this.model.get("isCompleted"));
-        console.log(this.model);
+        this.$el.toggleClass("list-group-item-warning", this.model.get("completed"));
+      },
+
+      removeTodoItem: function() {
+        this.model.destroy();
       },
 
       // Renders the view's template to the UI

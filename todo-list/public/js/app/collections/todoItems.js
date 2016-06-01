@@ -8,7 +8,9 @@ define(["jquery","backbone","../models/TodoItem"],
     var TodoItems = Backbone.Collection.extend({
 
       // Tells the Backbone TodoItems that all of it's models will be of type TodoItem (listed up top as a dependency)
-      model: TodoItem
+      model: TodoItem,
+
+      url: "http://jsonplaceholder.typicode.com/todos"
 
     });
 

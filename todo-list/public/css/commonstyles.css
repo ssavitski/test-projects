@@ -5,3 +5,10 @@
 #todo-items .list-group-item-warning label {
   text-decoration: line-through;
 }
+
+#todo-items .glyphicon-remove {
+  cursor: pointer;
+  right: 5px;
+  top: 6px;
+  pointer-events: all;
+}

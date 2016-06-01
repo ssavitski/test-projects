@@ -12,20 +12,23 @@ define(["jquery", "backbone"],
 
       },
 
+      urlRoot: "http://jsonplaceholder.typicode.com/todos",
+
       // Default values for all of the Model attributes
       defaults: {
-        isCompleted: false
+        completed: false
       },
 
       // Gets called automatically by Backbone when the set and/or save methods are called
       validate: function(attrs) {
-        if (!attrs.description) {
-          return "Description is required.";
+        if (!attrs.title) {
+          return "Title is required.";
         }
       },
 
       toggle: function() {
-        this.set("isCompleted", !this.get("isCompleted"));
+        this.set("completed", !this.get("completed"));
+        this.save();
       }
 
     });

@@ -38,10 +38,8 @@ define([
           // Instantiates a new view which will render the header text to the page
           new View();
 
-          var todoItems = new TodoItems([
-            new TodoItem({ description: "Complete learning course" }),
-            new TodoItem({ description: "Complete adapt framework learning" })
-          ]);
+          var todoItems = new TodoItems();
+          todoItems.fetch();
 
           var todoItemsView = new TodoItemsView({
             collection: todoItems

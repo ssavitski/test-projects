@@ -18,10 +18,15 @@ define([
 
       className: "list-group",
 
+      itemsForPage: 5,
+
+      currentPage: 1,
+
       // TodoItemsView constructor
       initialize: function(options) {
 
         this.collection.on("add", this.addTodoItem, this);
+        this.collection.on("remove", this.removeTodoItem, this);
 
         if (!(options && options.collection)) {
           throw new Error("Collection for TodoItemsView is not specified.");
@@ -39,7 +44,11 @@ define([
 
       addTodoItem: function(todoItem) {
         var view = new TodoItemView({ model: todoItem });
-        this.$el.append(view.$el);
+        this.$el.prepend(view.$el);
+      },
+
+      removeTodoItem: function(todoItem) {
+        this.$("#" + todoItem.cid).remove();
       },
 
       // Renders the view's template to the UI

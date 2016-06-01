@@ -4,10 +4,11 @@ define([
     "jquery",
     "underscore",
     "backbone",
+    "models/TodoItem",
     "text!templates/addnewitem.html"
   ],
 
-  function($, _, Backbone, template){
+  function($, _, Backbone, TodoItem, template){
 
     var TodoItemsView = Backbone.View.extend({
 
@@ -42,9 +43,12 @@ define([
         var $addItemField = this.$("#add-new-item-field");
 
         if (this.$("#add-new-item-field").val()) {
-          this.collection.add({
-            description: $addItemField.val()
+          var todoItem = new TodoItem({
+            title: $addItemField.val()
           });
+          todoItem.save();
+          this.collection.add(todoItem, { at: 0 });
+
           $addItemField.val("")
                        .focus();
         }

@@ -4,17 +4,14 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "models/Model",
-    "views/View",
-    "collections/Collection",
+    "models/TodoItem",
     "collections/TodoItems",
     "views/TodoItemView",
     "views/TodoItemsView",
-    "views/NewTodoItemView",
-    "models/TodoItem"
+    "views/NewTodoItemView"
   ],
 
-    function($, _, Backbone, Model, View, Collection, TodoItems, TodoItemView, TodoItemsView, NewTodoItemView, TodoItem) {
+    function($, _, Backbone, TodoItem, TodoItems, TodoItemView, TodoItemsView, NewTodoItemView) {
 
       var DesktopRouter = Backbone.Router.extend({
 
@@ -34,9 +31,6 @@ define([
         },
 
         index: function() {
-
-          // Instantiates a new view which will render the header text to the page
-          new View();
 
           var todoItems = new TodoItems();
           todoItems.fetch();

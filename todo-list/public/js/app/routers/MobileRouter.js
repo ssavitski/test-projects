@@ -1,8 +1,8 @@
 // MobileRouter.js
 // ---------------
-define(["jquery", "backbone", "models/Model", "views/View", "collections/Collection"],
+define(["jquery", "backbone"],
         
-    function($, Backbone, UserModel, View, Collection) {
+    function($, Backbone) {
 
         var MobileRouter = Backbone.Router.extend({
 
@@ -22,9 +22,6 @@ define(["jquery", "backbone", "models/Model", "views/View", "collections/Collect
             },
 
             index: function() {
-
-                // Instantiates a new view which will render the header text to the page
-                new View();
 
             }
     

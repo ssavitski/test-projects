@@ -1,8 +1,8 @@
 // Jasmine Unit Testing Suite
 // --------------------------
-define(["jquery", "backbone", "text!templates/heading.html", "views/View","models/Model", "collections/Collection", "routers/DesktopRouter", "routers/MobileRouter", "jasminejquery"],
+define(["jquery", "backbone", "routers/DesktopRouter", "routers/MobileRouter", "jasminejquery"],
 
-    function($, Backbone, headerText, View, Model, Collection, DesktopRouter, MobileRouter) {
+    function($, Backbone, DesktopRouter, MobileRouter) {
 
         // Test suite that includes all of the Jasmine unit tests   
         describe("Backbone-Require-Boilerplate (BRB)", function() {
@@ -10,76 +10,19 @@ define(["jquery", "backbone", "text!templates/heading.html", "views/View","model
             // Backbone View Suite: contains all tests related to views
             describe("Backbone views", function() {
 
-                // Runs before every View spec
-                beforeEach(function() {
-
-                    // Instantiates a new View instance
-                    this.view = new View();
-
-                });
-
-                it("should contain the correct view element", function() {
-
-                    this.router = new DesktopRouter();
-
-                    expect(this.view.$el.selector).toEqual(".example");
-
-                });
-
-                it("should contain the appropriate template", function() {
-
-                    expect(this.view.template).toEqual(headerText);
-
-                });
 
             }); // End of the View test suite
 
             // Backbone Model Suite: contains all tests related to models
             describe("Backbone models", function() {
 
-                // Runs before every Model spec
-                beforeEach(function() {
 
-                    // Instantiates a new Model instance
-                    this.model = new Model();
-
-                    // We are spying on the _validate method to see if it gets called
-                    spyOn(Model.prototype, "validate").andCallThrough();
-
-                });
-
-                it("should be in a valid state", function() {
-
-                    expect(this.model.isValid()).toBe(true);
-
-                });
-
-                it("should call the validate method when setting a property", function() {
-
-                    this.model.set({ example: "test" }, { validate: true });
-
-                    expect(Model.prototype.validate).toHaveBeenCalled();
-
-                });
 
             }); // End of the Model test suite
 
         // Backbone Collection Suite: contains all tests related to collections
         describe("Backbone collections", function() {
 
-            // Runs before every Collection spec
-            beforeEach(function() {
-
-                // Instantiates a new Collection instance
-                this.collection = new Collection();
-
-            });
-
-            it("should contain the correct number of models", function() {
-
-                expect(this.collection.length).toEqual(0);
-
-            });
 
         }); // End of the Collection test suite
 

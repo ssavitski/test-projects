@@ -21,6 +21,8 @@ require.config({
 
       "backbone": "../libs/backbone",
 
+      "mustache": "../libs/mustache",
+
       // Plugins
       // -------
       "backbone.validateAll": "../libs/plugins/Backbone.validateAll",

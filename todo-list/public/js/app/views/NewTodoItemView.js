@@ -5,10 +5,11 @@ define([
     "underscore",
     "backbone",
     "models/TodoItem",
-    "text!templates/addnewitem.html"
+    "text!templates/addnewitem.html",
+    "mustache"
   ],
 
-  function($, _, Backbone, TodoItem, template){
+  function($, _, Backbone, TodoItem, template, Mustache){
 
     var TodoItemsView = Backbone.View.extend({
 
@@ -58,7 +59,7 @@ define([
       render: function() {
 
         // Setting the view's template property using the Underscore template method
-        this.template = _.template(template, {});
+        this.template = Mustache.render(template, {});
 
         // Dynamically updates the UI with the view's template
         this.$el.html(this.template);

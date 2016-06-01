@@ -4,10 +4,11 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "text!templates/todoItem.html"
+    "text!templates/todoItem.html",
+    "mustache"
   ],
 
-  function($, _, Backbone, template){
+  function($, _, Backbone, template, Mustache){
 
     var TodoItemView = Backbone.View.extend({
 
@@ -52,7 +53,7 @@ define([
       render: function() {
 
         // Setting the view's template property using the Underscore template method
-        this.template = _.template(template, {
+        this.template = Mustache.render(template, {
           id: this.model.cid,
           todoItem: this.model.toJSON()
         });

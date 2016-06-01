@@ -54,12 +54,6 @@ define([
       // Renders the view's template to the UI
       render: function() {
 
-        var self = this;
-        this.collection.each(function(todoItem) {
-          var view = new TodoItemView({ model: todoItem });
-          self.$el.append(view.$el);
-        });
-
         // Maintains chainability
         return this;
 

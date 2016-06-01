@@ -1,0 +1,7 @@
+#add-new-item {
+  margin-bottom: 20px;
+}
+
+#todo-items .list-group-item-warning label {
+  text-decoration: line-through;
+}

@@ -14,7 +14,7 @@ define(["jquery", "backbone"],
 
       // Default values for all of the Model attributes
       defaults: {
-
+        isCompleted: false
       },
 
       // Gets called automatically by Backbone when the set and/or save methods are called
@@ -22,6 +22,10 @@ define(["jquery", "backbone"],
         if (!attrs.description) {
           return "Description is required.";
         }
+      },
+
+      toggle: function() {
+        this.set("isCompleted", !this.get("isCompleted"));
       }
 
     });

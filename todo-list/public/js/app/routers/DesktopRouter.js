@@ -10,10 +10,11 @@ define([
     "collections/TodoItems",
     "views/TodoItemView",
     "views/TodoItemsView",
+    "views/NewTodoItemView",
     "models/TodoItem"
   ],
 
-    function($, _, Backbone, Model, View, Collection, TodoItems, TodoItemView, TodoItemsView, TodoItem) {
+    function($, _, Backbone, Model, View, Collection, TodoItems, TodoItemView, TodoItemsView, NewTodoItemView, TodoItem) {
 
       var DesktopRouter = Backbone.Router.extend({
 
@@ -46,7 +47,15 @@ define([
             collection: todoItems
           });
 
-          $(".view").html(todoItemsView.$el);
+          var newTodoItemView = new NewTodoItemView({
+            collection: todoItems
+          });
+
+          $(".view").html("")
+                    .append(
+            newTodoItemView.$el,
+            todoItemsView.$el
+          );
 
         }
 

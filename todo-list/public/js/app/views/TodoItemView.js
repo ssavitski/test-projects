@@ -3,15 +3,18 @@
 define([
     "jquery",
     "underscore",
-    "backbone"
+    "backbone",
+    "text!templates/todoItem.html"
   ],
 
-  function($, _, Backbone){
+  function($, _, Backbone, template){
 
     var TodoItemView = Backbone.View.extend({
 
       // The DOM Element associated with this view
       tagName: "li",
+
+      className: "list-group-item",
 
       // TodoItemView constructor
       initialize: function(options) {
@@ -27,13 +30,26 @@ define([
 
       // TodoItemView Event Handlers
       events: {
+        "change .task-status": "changeStatus"
+      },
 
+      changeStatus: function() {
+        this.model.toggle();
+        this.$el.toggleClass("list-group-item-warning", this.model.get("isCompleted"));
+        console.log(this.model);
       },
 
       // Renders the view's template to the UI
       render: function() {
 
-        this.$el.html(this.model.get("description"));
+        // Setting the view's template property using the Underscore template method
+        this.template = _.template(template, {
+          id: this.model.cid,
+          todoItem: this.model.toJSON()
+        });
+
+        // Dynamically updates the UI with the view's template
+        this.$el.html(this.template);
 
         // Maintains chainability
         return this;

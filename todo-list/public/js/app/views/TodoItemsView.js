@@ -14,8 +14,14 @@ define([
       // The DOM Element associated with this view
       tagName: "ul",
 
+      id: "todo-items",
+
+      className: "list-group",
+
       // TodoItemsView constructor
       initialize: function(options) {
+
+        this.collection.on("add", this.addTodoItem, this);
 
         if (!(options && options.collection)) {
           throw new Error("Collection for TodoItemsView is not specified.");
@@ -29,6 +35,11 @@ define([
       // TodoItemView Event Handlers
       events: {
 
+      },
+
+      addTodoItem: function(todoItem) {
+        var view = new TodoItemView({ model: todoItem });
+        this.$el.append(view.$el);
       },
 
       // Renders the view's template to the UI

@@ -15,7 +15,7 @@ define([
       el: "#navigation",
 
       // NavView constructor
-      initialize: function(options) {
+      initialize: function() {
 
         // Calls the view's render method
         this.render();

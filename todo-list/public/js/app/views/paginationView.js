@@ -22,7 +22,9 @@ define([
 
         if (options.settings) {
           this.settings = options.settings;
-          this.pageCount = Math.ceil(this.collection.length / this.settings.itemsForPage);
+          this.pageCount = function() {
+            return Math.ceil(this.collection.length / this.settings.itemsForPage);
+          }
         }
 
         if (!(options && options.collection)) {
@@ -30,6 +32,7 @@ define([
         }
 
         this.collection.on("remove", this.render, this);
+        this.collection.on("add", this.render, this);
 
         // Calls the view's render method
         this.render();
@@ -52,7 +55,7 @@ define([
       },
 
       goNext: function() {
-        if (this.settings.currentPage < this.pageCount) {
+        if (this.settings.currentPage < this.pageCount()) {
           var currentPage = this.settings.currentPage + 1;
           this.renderNav($("a[data-number='" + currentPage + "']").parent(), currentPage, this);
         }
@@ -76,7 +79,7 @@ define([
 
         // Setting the view's template property using the Underscore template method
         this.template = _.template(template, {
-          pageCount: this.pageCount,
+          pageCount: this.pageCount(),
           currentPage: this.settings.currentPage
         });
 

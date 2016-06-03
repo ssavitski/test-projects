@@ -10,14 +10,9 @@ define([
     // Creates a new Backbone TodoItem class object
     var TodoItem = Backbone.Model.extend({
 
-      // TodoItem Constructor
-      initialize: function() {
-
-      },
-
       urlRoot: "http://jsonplaceholder.typicode.com/todos",
 
-      // Default values for all of the Model attributes
+      // Default values for all of the TodoItem attributes
       defaults: {
         completed: false
       },

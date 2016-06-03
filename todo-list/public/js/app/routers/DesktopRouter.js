@@ -21,6 +21,9 @@ define([
         initialize: function() {
 
           new NavView();
+
+          this.viewContainer = $(".view");
+
           // Tells Backbone to start watching for hashchange events
           Backbone.history.start();
 
@@ -28,28 +31,31 @@ define([
 
         itemsForPage: 15,
 
-        // All of your Backbone Routes (add more)
+        // All of your Backbone Routes
         routes: {
-
-          "todoItems" : "todoItems",
 
           // When there is no hash on the url, the home method is called
           "": "home",
+
+          "todoItems" : "todoItems",
 
           "*other": "index"
 
         },
 
         home: function() {
+
+          this.viewContainer.html("");
           var homeView = new HomeView();
-          $(".view").html("")
-                    .append(homeView.$el);
+          this.viewContainer.append(homeView.$el);
+
         },
 
         todoItems: function() {
 
-          $(".view").html("");
+          this.viewContainer.html("");
 
+          var self = this;
           var settings = _.extend({}, Backbone.Events);
           settings.itemsForPage = this.itemsForPage;
           settings.currentPage = 1;
@@ -63,10 +69,9 @@ define([
             success: function() {
 
               var newTodoItemView = new NewTodoItemView(options);
-
               var pagination = new PaginationView(options);
 
-              $(".view").append(
+              self.viewContainer.append(
                 newTodoItemView.$el,
                 todoItemsView.$el,
                 pagination.$el

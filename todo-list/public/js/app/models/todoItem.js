@@ -1,6 +1,9 @@
 // TodoItem.js
 // --------
-define(["jquery", "backbone"],
+define([
+    "jquery",
+    "backbone"
+  ],
 
   function($, Backbone) {
 

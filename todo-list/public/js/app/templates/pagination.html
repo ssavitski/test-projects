@@ -1,0 +1,17 @@
+<ul class="pagination">
+  <li class="prev-item">
+    <a href="#" aria-label="Previous">
+      <span aria-hidden="true">&laquo;</span>
+    </a>
+  </li>
+
+  <% for (var i = 1; i <= pageCount; i++) { %>
+    <li class="<%= (i == currentPage) ? 'active item' : 'item' %>" ><a href="#" data-number="<%= i %>"><%= i %></a></li>
+  <% } %>
+
+  <li class="next-item">
+    <a href="#" aria-label="Next">
+      <span aria-hidden="true">&raquo;</span>
+    </a>
+  </li>
+</ul>

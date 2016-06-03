@@ -11,7 +11,7 @@ define([
 
   function($, _, Backbone, TodoItem, template, Mustache){
 
-    var TodoItemsView = Backbone.View.extend({
+    var NewTodoItemView = Backbone.View.extend({
 
       // The DOM Element associated with this view
       tagName: "div",
@@ -20,15 +20,25 @@ define([
 
       id: "add-new-item",
 
-      // TodoItemsView constructor
+      // NewTodoItemView constructor
       initialize: function(options) {
+
+        if (options.settings) {
+          this.settings = options.settings;
+        }
+
+        if (!(options && options.collection)) {
+          throw new Error("Collection for PaginationView is not specified.");
+        }
+
+        this.collection.on("add", this.addToCollection, this);
 
         // Calls the view's render method
         this.render();
 
       },
 
-      // TodoItemView Event Handlers
+      // NewTodoItemView Event Handlers
       events: {
         "click #add-new-item-action": "addItem",
         "keypress #add-new-item-field": "addItemByKeyPress"
@@ -47,18 +57,24 @@ define([
           var todoItem = new TodoItem({
             title: $addItemField.val()
           });
+          var currentPage = this.settings.currentPage - 1;
+          var itemsForPage = this.settings.itemsForPage;
           todoItem.save();
-          this.collection.add(todoItem, { at: 0 });
+          this.collection.add(todoItem, { at: currentPage * itemsForPage });
 
           $addItemField.val("")
                        .focus();
         }
       },
 
+      addToCollection: function() {
+        this.settings.trigger("goPage");
+      },
+
       // Renders the view's template to the UI
       render: function() {
 
-        // Setting the view's template property using the Underscore template method
+        // Setting the view's template property using the Mustache template method
         this.template = Mustache.render(template, {});
 
         // Dynamically updates the UI with the view's template
@@ -71,8 +87,8 @@ define([
 
     });
 
-    // Returns the TodoItemsView class
-    return TodoItemsView;
+    // Returns the NewTodoItemView class
+    return NewTodoItemView;
 
   }
 

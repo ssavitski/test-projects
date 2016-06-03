@@ -1,5 +1,23 @@
 body {
   background: #e0e0e0;
+  padding-bottom: 60px;
+}
+
+footer {
+  right: auto !important;
+}
+
+.view-wrapper {
+  min-height: 200px;
+  background: url(../img/preloader.gif) center center no-repeat;
+}
+
+.view {
+  background-color: #e0e0e0;
+}
+
+#pagination {
+  text-align: center;
 }
 
 #add-new-item {

@@ -8,46 +8,74 @@ define([
     "collections/TodoItems",
     "views/TodoItemView",
     "views/TodoItemsView",
-    "views/NewTodoItemView"
+    "views/NewTodoItemView",
+    "views/PaginationView",
+    "views/HomeView",
+    "views/NavView"
   ],
 
-    function($, _, Backbone, TodoItem, TodoItems, TodoItemView, TodoItemsView, NewTodoItemView) {
+    function($, _, Backbone, TodoItem, TodoItems, TodoItemView, TodoItemsView, NewTodoItemView, PaginationView, HomeView, NavView) {
 
       var DesktopRouter = Backbone.Router.extend({
 
         initialize: function() {
 
+          new NavView();
           // Tells Backbone to start watching for hashchange events
           Backbone.history.start();
 
         },
 
+        itemsForPage: 15,
+
         // All of your Backbone Routes (add more)
         routes: {
 
+          "todoItems" : "todoItems",
+
           // When there is no hash on the url, the home method is called
-          "": "index"
+          "": "home",
+
+          "*other": "index"
 
         },
 
-        index: function() {
-
-          var todoItems = new TodoItems();
-          todoItems.fetch();
-
-          var todoItemsView = new TodoItemsView({
-            collection: todoItems
-          });
-
-          var newTodoItemView = new NewTodoItemView({
-            collection: todoItems
-          });
-
+        home: function() {
+          var homeView = new HomeView();
           $(".view").html("")
-                    .append(
-            newTodoItemView.$el,
-            todoItemsView.$el
-          );
+                    .append(homeView.$el);
+        },
+
+        todoItems: function() {
+
+          $(".view").html("");
+
+          var settings = _.extend({}, Backbone.Events);
+          settings.itemsForPage = this.itemsForPage;
+          settings.currentPage = 1;
+          var todoItems = new TodoItems();
+          var options = {
+            collection: todoItems,
+            settings: settings
+          };
+
+          todoItems.fetch({
+            success: function() {
+
+              var newTodoItemView = new NewTodoItemView(options);
+
+              var pagination = new PaginationView(options);
+
+              $(".view").append(
+                newTodoItemView.$el,
+                todoItemsView.$el,
+                pagination.$el
+              );
+
+            }
+          });
+
+          var todoItemsView = new TodoItemsView(options);
 
         }
 

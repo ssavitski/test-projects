@@ -144,13 +144,15 @@
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <div class="container-fluid container">
       <div class="row">
-        <header data-role="header" class="navbar nav navbar-inner">
+        <header data-role="header" class="col-xs-12 col-md-12">
           <h1>Daily Todo list</h1>
         </header> <!-- /header -->
       </div>
       <div class="row">
-        <div class="col-xs-6 col-md-4">Menu</div>
-        <div class="col-xs-12 col-md-8 view" data-role="content"></div>
+        <div class="col-xs-6 col-md-4" id="navigation"></div>
+        <div class="col-xs-12 col-md-8 view-wrapper" data-role="content">
+          <div class="view"></div>
+        </div>
       </div>
     </div>
 

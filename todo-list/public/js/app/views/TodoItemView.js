@@ -52,7 +52,7 @@ define([
       // Renders the view's template to the UI
       render: function() {
 
-        // Setting the view's template property using the Underscore template method
+        // Setting the view's template property using the Mustache template method
         this.template = Mustache.render(template, {
           id: this.model.cid,
           todoItem: this.model.toJSON()

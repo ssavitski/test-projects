@@ -1,6 +1,6 @@
 // Jasmine Unit Testing Suite
 // --------------------------
-define(["jquery", "backbone", "text!templates/heading.html", "views/View","models/Model", "collections/Collection", "routers/DesktopRouter", "routers/MobileRouter", "jasminejquery"],
+define(["jquery", "backbone", "text!templates/blogrollList.html", "../../app/views/BlogrollListView","../../app/models/Blog", "../../app/collections/Blogs", "routers/DesktopRouter", "routers/MobileRouter", "jasminejquery"],
 
     function($, Backbone, headerText, View, Model, Collection, DesktopRouter, MobileRouter) {
 

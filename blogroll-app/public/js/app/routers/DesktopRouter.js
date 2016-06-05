@@ -1,38 +1,65 @@
 // DesktopRouter.js
 // ----------------
-define(["jquery", "backbone", "models/Model", "views/View", "collections/Collection"],
+define(["jquery", "backbone", "../models/Blog", "../views/BlogrollListView", "../collections/Blogs"],
 
-    function($, Backbone, Model, View, Collection) {
+  function($, Backbone, Blog, BlogrollListView, Blogs) {
 
-        var DesktopRouter = Backbone.Router.extend({
+    var DesktopRouter = Backbone.Router.extend({
 
-            initialize: function() {
+      initialize: function() {
 
-                // Tells Backbone to start watching for hashchange events
-                Backbone.history.start();
+        this.viewContainer = $(".view");
 
-            },
+        // Tells Backbone to start watching for hashchange events
+        Backbone.history.start();
 
-            // All of your Backbone Routes (add more)
-            routes: {
+      },
 
-                // When there is no hash on the url, the home method is called
-                "": "index"
+      // All of your Backbone Routes (add more)
+      routes: {
 
-            },
+        "": "index",
+        "blogroll-list": "blogrollList",
+        "*other": "blogrollList"
 
-            index: function() {
+      },
 
-                // Instantiates a new view which will render the header text to the page
-                new View();
+      index: function() {
 
-            }
 
+      },
+
+      blogrollList: function() {
+
+        var blog1 = new Blog({
+          author: "Michael",
+          title: "Michael\'s Blog",
+          url: "http://michaelsblog.com"
         });
 
-        // Returns the DesktopRouter class
-        return DesktopRouter;
+        var blog2 = new Blog({
+          author: "John",
+          title: "John\'s Blog",
+          url: "http://johnsblog.com"
+        });
 
-    }
+        var blogs = new Blogs([
+          blog1, blog2
+        ]);
+
+        var view = new BlogrollListView({
+          collection: blogs
+        });
+        
+        this.viewContainer.html(view.$el);
+
+      }
+
+    });
+
+    // Returns the DesktopRouter class
+    return DesktopRouter;
+
+  }
 
 );

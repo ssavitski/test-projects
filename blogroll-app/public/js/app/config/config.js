@@ -9,47 +9,49 @@ require.config({
   // probably a good idea to keep version numbers in the file names for updates checking
   paths: {
 
-      // Core Libraries
-      // --------------
-      "jquery": "../libs/jquery",
+    // Core Libraries
+    // --------------
+    "jquery": "../libs/jquery",
 
-      "jqueryui": "../libs/jqueryui",
+    "jqueryui": "../libs/jqueryui",
 
-      "jquerymobile": "../libs/jquery.mobile",
+    "jquerymobile": "../libs/jquery.mobile",
 
-      "underscore": "../libs/lodash",
+    "underscore": "../libs/lodash",
 
-      "backbone": "../libs/backbone",
+    "backbone": "../libs/backbone",
 
-      // Plugins
-      // -------
-      "backbone.validateAll": "../libs/plugins/Backbone.validateAll",
+    "mustache": "../libs/mustache",
 
-      "bootstrap": "../libs/plugins/bootstrap",
+    // Plugins
+    // -------
+    "backbone.validateAll": "../libs/plugins/Backbone.validateAll",
 
-      "text": "../libs/plugins/text",
+    "bootstrap": "../libs/plugins/bootstrap",
 
-      "jasminejquery": "../libs/plugins/jasmine-jquery"
+    "text": "../libs/plugins/text",
+
+    "jasminejquery": "../libs/plugins/jasmine-jquery"
 
   },
 
   // Sets the configuration for your third party scripts that are not AMD compatible
   shim: {
 
-      // jQuery Mobile
-      "jquerymobile": ["jquery"],
+    // jQuery Mobile
+    "jquerymobile": ["jquery"],
 
-      // Twitter Bootstrap jQuery plugins
-      "bootstrap": ["jquery"],
+    // Twitter Bootstrap jQuery plugins
+    "bootstrap": ["jquery"],
 
-      // jQueryUI
-      "jqueryui": ["jquery"],
+    // jQueryUI
+    "jqueryui": ["jquery"],
 
-      // Backbone.validateAll plugin that depends on Backbone
-      "backbone.validateAll": ["backbone"],
+    // Backbone.validateAll plugin that depends on Backbone
+    "backbone.validateAll": ["backbone"],
 
-      // Jasmine-jQuery plugin
-      "jasminejquery": ["jquery"]
+    // Jasmine-jQuery plugin
+    "jasminejquery": ["jquery"]
 
   }
 

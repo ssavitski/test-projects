@@ -23,6 +23,7 @@ define([
       initialize: function() {
 
         this.collection.on("add", this.addBlog, this);
+        this.collection.on("remove", this.addBlog, this);
         this.render();
         this.addBlog();
 

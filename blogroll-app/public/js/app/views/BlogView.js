@@ -27,7 +27,9 @@ define([
       // View Event Handlers
       events: {
         "click .edit-button": "edit",
-        "click .update-button": "update"
+        "click .update-button": "update",
+        "click .cancel-button": "cancel",
+        "click .delete-button": "delete"
       },
 
       edit: function() {
@@ -39,6 +41,14 @@ define([
         this.$(".url").html("<input type=\"text\" class=\"edit-url form-control\" value=\"" + url + "\" />");
         this.$(".update-button, .cancel-button").removeClass("hide");
         this.$(".edit-button, .delete-button").addClass("hide");
+      },
+
+      cancel: function() {
+        this.render();
+      },
+
+      delete: function() {
+        this.model.destroy();
       },
 
       update: function() {

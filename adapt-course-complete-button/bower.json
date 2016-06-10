@@ -1,0 +1,23 @@
+{
+  "name": "adapt-course-complete-button",
+  "authors": [
+    "Siarhei Savitski <siarhei.savitski@instinctools.ru>"
+  ],
+  "version": "1.0.0",
+  "framework": ">2.0.0",
+  "description": "An extension for removing default Go back button from the page and adding a new one after course is finished. This new one button is serve for returning back, signaling activity completion and closing the window",
+  "main": "/js/adapt-course-complete-button.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

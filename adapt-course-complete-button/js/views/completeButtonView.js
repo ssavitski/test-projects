@@ -1,4 +1,3 @@
-
 define([
     'backbone',
     'coreJS/adapt',
@@ -10,32 +9,27 @@ define([
         initialize: function() {
             this.render();
             this.currentEvent = $('.complete-button-action').attr('data-event'); 
-            console.log(Adapt);
         },
 
         events: {
             "click .complete-button-action": "onCompleteActivity"
         },
 
-        onCompleteActivity: function() {
-            Adapt.course.set("_isComplete", true);
+        setCourseCompleteAndReturn: function() {
+        	Adapt.course.set("_isComplete", true);
             var currentEvent = (this.currentEvent) ? this.currentEvent : 'backButton';
-            console.log("Complete", Adapt.course.get("_isComplete"));
             Adapt.trigger('navigation:' + currentEvent);
+        },
+
+        onCompleteActivity: function() {
+        	// this.setCourseCompleteAndReturn();
+            window.top.postMessage('exit', '*');  
             this.$el.remove();
         },
 
         render: function() {
-            // var data = this.model.toJSON();
-            var data = {
-                _isVisible: true,
-                _completeButton: {
-                    ariaLabel: "Complete Activity and navigate back by clicking here.",
-                    buttonText: "Complete Activity"
-                }
-            }
             var template = Handlebars.templates['completeButton'];
-            this.$el.html(template(data));
+            this.$el.html(template(this.model));
             return this;
         }
 

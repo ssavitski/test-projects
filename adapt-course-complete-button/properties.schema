@@ -1,0 +1,70 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "required":false,
+  "properties":{
+    "pluginLocations": {
+      "type":"object",
+      "required":true,
+      "properties":{
+        "config": {
+          "type":"object"
+        },
+        "course": {
+          "type":"object",
+          "properties":{
+            "_settings": {
+              "type": "object",
+              "required": false,
+              "legend": "Button Settings",
+              "properties": {
+                "_isEnabled": {
+                  "type": "boolean",
+                  "required":true,
+                  "default": true,
+                  "title": "Is enabled",
+                  "inputType": {"type": "Boolean", "options": [true, false]},
+                  "validators": [],
+                  "help": "If set to 'false', Complete Activity button will not be shown on the page"
+                },
+                "_completeButton": {
+                  "type":"object",
+                  "title": "Complete button properties",
+                  "properties": {
+                    "ariaLabel": {
+                      "type": "string",
+                      "default": "Documents",
+                      "title": "",
+                      "inputType": "Text",
+                      "validators": []
+                    },
+                    "buttonText": {
+                      "type": "string",
+                      "default": "Media",
+                      "title": "",
+                      "inputType": "Text",
+                      "validators": []
+                    },
+                  }
+                }
+              }
+            }
+          }
+        },
+        "contentobject": {
+          "type":"object"
+        },
+        "article": {
+          "type":"object"
+        },
+        "block": {
+          "type":"object"
+        },
+        "component": {
+          "type":"object"
+        }
+      }
+    }
+  }
+}

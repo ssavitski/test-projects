@@ -101,12 +101,16 @@ define(function(require) {
             }, this);
         },
 
-        onQuestionRendered: function() {
-            this.setReadyStatus();
+        changeFeedbackButton: function() {
             if (!this.model.get("_showFeedbackButton")) {
                 this.buttonsView.$el.find('.buttons-feedback').remove();
-                this.buttonsView.$el.find('.buttons-action').addClass('single-action-button');
+                this.buttonsView.$el.addClass('no-feedback-button');
             }
+        },
+
+        onQuestionRendered: function() {
+            this.setReadyStatus();
+            this.changeFeedbackButton();
         },
 
         onKeyPress: function(event) {

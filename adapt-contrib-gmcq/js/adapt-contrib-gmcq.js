@@ -57,6 +57,7 @@ define(function(require) {
 
         onQuestionRendered: function() {
 
+            this.changeFeedbackButton();
             this.resizeImage(Adapt.device.screenSize);
             this.setUpColumns();
 

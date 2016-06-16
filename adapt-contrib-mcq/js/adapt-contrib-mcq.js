@@ -4,11 +4,23 @@ define(function(require) {
 
     var Mcq = QuestionView.extend({
 
+        initialize: function() {
+            QuestionView.prototype.initialize.apply(this, arguments);
+            this.listenTo(Adapt, 'notify:closed', this.autoReset);
+        },
+
         events: {
             'focus .mcq-item input':'onItemFocus',
             'blur .mcq-item input':'onItemBlur',
             'change .mcq-item input':'onItemSelected',
             'keyup .mcq-item input':'onKeyPress'
+        },
+
+        autoReset: function() {
+            if (!this.isCorrect() && this.model.get('_attemptsLeft')) {
+                this.buttonsView.trigger('buttons:reset');
+            }
+            console.log('Question object: ',this);
         },
 
         resetQuestionOnRevisit: function() {
@@ -91,6 +103,10 @@ define(function(require) {
 
         onQuestionRendered: function() {
             this.setReadyStatus();
+            if (!this.model.get("_showFeedbackButton")) {
+                this.buttonsView.$el.find('.buttons-feedback').remove();
+                this.buttonsView.$el.find('.buttons-action').addClass('single-action-button');
+            }
         },
 
         onKeyPress: function(event) {

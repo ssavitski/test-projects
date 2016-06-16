@@ -20,7 +20,6 @@ define(function(require) {
             if (!this.isCorrect() && this.model.get('_attemptsLeft')) {
                 this.buttonsView.trigger('buttons:reset');
             }
-            console.log('Question object: ',this);
         },
 
         resetQuestionOnRevisit: function() {

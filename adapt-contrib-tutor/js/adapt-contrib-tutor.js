@@ -1,6 +1,7 @@
 define([
-    'coreJS/adapt'
-],function(Adapt) {
+    'coreJS/adapt',
+    'handlebars'
+],function(Adapt, Handlebars) {
 
     Adapt.on('questionView:showFeedback', function(view) {
 
@@ -8,28 +9,41 @@ define([
             title: view.model.get("feedbackTitle"),
             body: view.model.get("feedbackMessage")
         };
+        var template = Handlebars.templates['answerStatus'];
 
         if (view.model.has('_isCorrect')) {
             var answerIndicator = '';
             // Attach specific classes so that feedback can be styled.
             if (view.model.get('_isCorrect')) {
-                answerIndicator = '<b>Correct! </b>';
                 alertObject._classes = 'correct';
+                answerIndicator = template({ 
+                	answerStatus: 'Correct!',
+                	className: alertObject._classes
+                });
             } else {
                 if (view.model.has('_isAtLeastOneCorrectSelection')) {
                     // Partially correct feedback is an option.
-                    answerIndicator = view.model.get('_isAtLeastOneCorrectSelection')
-                        ? '<b>Partially correct! </b>'
-                        : '<b>Incorrect! </b>';
                     alertObject._classes = view.model.get('_isAtLeastOneCorrectSelection')
                         ? 'partially-correct'
                         : 'incorrect';
+                    answerIndicator = view.model.get('_isAtLeastOneCorrectSelection')
+                        ? template({ 
+                        	answerStatus: 'Partially correct!',
+                        	className: alertObject._classes
+                        })
+                        : template({ 
+                        	answerStatus: 'Incorrect',
+                        	className: alertObject._classes
+                        });
                 } else {
-                    answerIndicator = '<b>Incorrect! </b>';
-                    alertObject._classes = 'incorrect';
+                	alertObject._classes = 'incorrect';
+                    answerIndicator = template({ 
+                    	answerStatus: 'Incorrect',
+                    	className: alertObject._classes
+                    });
                 }
             }
-            alertObject.title = answerIndicator + alertObject.title;
+            alertObject.title = answerIndicator;
         }
 
         Adapt.once("notify:closed", function() {

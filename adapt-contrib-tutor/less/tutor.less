@@ -10,3 +10,27 @@
 	}
 
 }
+
+.answer-status-icon {
+	width: 40px;
+	margin-right: 10px;
+	border-radius: 20px;
+	float: left;
+
+	@media (max-width: 520px) {
+		width: 30px;
+		margin-right: 5px;
+	}
+	
+	&.answer-incorrect {
+		background-color: darken(@red, 20);
+	}
+
+	&.answer-correct {
+		background-color: darken(@green, 20);
+	}
+
+	img {
+		display: block;
+	}
+}

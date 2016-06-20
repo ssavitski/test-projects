@@ -1,0 +1,24 @@
+{
+  "name": "adapt-proof-of-concept",
+  "authors": [
+    "Siarhei Savitski <siarhei.savitski@instinctools.ru>"
+  ],
+  "version": "1.0.0",
+  "framework": ">2.0.0",
+  "description": "An extension that allows an author to create a wizard-style experience using adapt. This extension unlock content on new 'pages', one for each content block. The experience is like flipping through a book rather than reading one long single-page document.",
+  "main": "/js/adapt-proof-of-concept.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "GPLv3",
+  "targetAttribute": "_proofOfConcept",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

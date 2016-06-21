@@ -26,10 +26,6 @@ define([
             }
         },
 
-        onGetLastBlock: function(view) {
-            console.log("Check this", Adapt, view);
-        },
-
         onAppDataReady: function() {
             this.buttonSettings = Adapt.course.get('_settings');
         }

@@ -173,6 +173,7 @@ define([
                 "remove": this.onRemove,
                 "proof-of-concept:goNext": this.goNext,
                 "proof-of-concept:goPrev": this.goPrev,
+                "proof-of-concept:continue": this.onContinue,
                 "articleView:preRender": this.onDescendantPreRender,
                 "blockView:preRender": this.onDescendantPreRender
             });
@@ -192,7 +193,6 @@ define([
 
         goNext: function() {
         	this.currentDescendant.trigger("steplock");
-        	console.log('currentLocksOnDescendant', this.currentLocksOnDescendant);
         	this.currentLocksOnDescendant--;
             if (this.currentLocksOnDescendant > 0) return;
             
@@ -200,6 +200,10 @@ define([
             
             this.currentDescendantIndex++;
             this.gotoNextDescendant();
+        },
+
+        onContinue: function() {
+            console.log("Continue...");
         },
 
         goPrev: function() {

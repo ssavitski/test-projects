@@ -6,12 +6,13 @@
 define([
     'backbone',
     'coreJS/adapt',
-    './views/nextPageButtonView',
     './views/pageView',
+    './helpers/adapt-proof-of-concept-helper',
     './lib/adaptModelExtension',
     './handlers/button',
+    './handlers/completion',
     './handlers/visibility'
-], function(Backbone, Adapt, NextPageButtonView, PageView) {
+], function(Backbone, Adapt, PageView, ProofOfConceptHelper) {
 
     Adapt.proofOfConcept = _.extend({
 

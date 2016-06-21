@@ -3,15 +3,21 @@
     "_isEnabled": true,
     "_onChildren": true,
     "_button": {
-        "_isEnabled": true,
-        "_styleBeforeCompletion": "hidden",
-        "_styleAfterClick": "hidden",
-        "buttonNextText": "Next page",
-        "buttonPrevText": "Prev page",
-        "_component": "next-page-button",
-        "_isLocking": true,
-        "_isVisible": false,
-        "_isDisabled": false
+        "prev": {
+            "_isEnabled": true,
+            "_style": "disabled",
+            "text": "Prev page",
+            "_isVisible": true,
+            "_isDisabled": false
+        },
+        "next": {
+            "_styleBeforeCompletion": "disabled",   
+            "text": "Next page",
+            "_isVisible": true,
+            "_isDisabled": true
+        },              
+        "_component": "navigate-buttons",
+        "_isLocking": true
     },
     "_stepLocking": {
         "_isEnabled": true,

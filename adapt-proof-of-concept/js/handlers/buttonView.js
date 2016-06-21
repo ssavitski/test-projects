@@ -13,16 +13,13 @@ define([
         isStepLocked: false,
         isStepLockFinished: false,
         hasStepPreCompleted: false,
-        isWaitingForClick: false,
-        allowVisible: false,
         allowEnabled: true,
-        overlayShownCount: 0,
 
         el: function() {
 
             this.setupPreRender();
 
-            return Handlebars.templates['next-page-button'](this.model.toJSON());
+            return Handlebars.templates['navigate-buttons'](this.model.toJSON());
         },
 
         setupPreRender: function() {
@@ -33,11 +30,11 @@ define([
 
         setupButtonVisible: function() {
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
-            this.allowVisible = false;
-            proofOfConcept._button._isVisible = false;
-
-            if (proofOfConcept._button._styleBeforeCompletion === "visible") {
-                this.allowVisible = true;
+            
+            if (proofOfConcept._button.next._styleBeforeCompletion === "hidden") {
+                proofOfConcept._button.next._isVisible = false;
+            } else {
+                proofOfConcept._button.next._isVisible = true;
             }
         },
 
@@ -46,12 +43,12 @@ define([
             
             if (proofOfConcept._stepLocking._isCompletionRequired === false) {
                 this.allowEnabled = true;
-                proofOfConcept._button._isDisabled = false;   
-            } else if (proofOfConcept._button._styleBeforeCompletion === "visible") {
+                proofOfConcept._button.next._isDisabled = false;   
+            } else if (proofOfConcept._button.next._styleBeforeCompletion === "disabled") {
                 this.allowEnabled = false;
-                proofOfConcept._button._isDisabled = true;
+                proofOfConcept._button.next._isDisabled = true;
             } else {
-                proofOfConcept._button._isDisabled = false;
+                proofOfConcept._button.next._isDisabled = false;
                 this.allowEnabled = true;
             }
 
@@ -103,11 +100,11 @@ define([
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
             if (!bool) {
                 this.$(".button-next").addClass("display-none");
-                proofOfConcept._button._isVisible = false;
+                proofOfConcept._button.next._isVisible = false;
                 //console.log("trickle hiding button", this.model.get("_id"));
             } else {
                 this.$(".button-next").removeClass("display-none");
-                proofOfConcept._button._isVisible = true;
+                proofOfConcept._button.next._isVisible = true;
                 //console.log("trickle showing button", this.model.get("_id"));
             }
         },
@@ -123,11 +120,11 @@ define([
         setButtonEnabled: function(bool) {
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
             if (bool) {
-                this.$("button").removeClass("disabled").removeAttr("disabled");
-                proofOfConcept._button._isDisabled = true;
+                this.$(".button-next").removeClass("disabled").removeAttr("disabled");
+                proofOfConcept._button.next._isDisabled = true;
             } else {
-                this.$("button").addClass("disabled").attr("disabled", "disabled");
-                proofOfConcept._button._isDisabled = false;
+                this.$(".button-next").addClass("disabled").attr("disabled", "disabled");
+                proofOfConcept._button.next._isDisabled = false;
             }
         },
 
@@ -144,12 +141,10 @@ define([
 
                 if (isCompleteAndShouldRelock) {
                     this.isStepLocked = true;
-                    this.allowVisible = true;
                     this.setButtonVisible(true);
                 } else if (this.hasStepPreCompleted) {
                     //force the button to show if section completed before it was steplocked
                     this.isStepLocked = true;
-                    this.allowVisible = true;
                     this.stepCompleted();
                 }
             }
@@ -162,7 +157,7 @@ define([
         isButtonEnabled: function() {
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
 
-            if (!proofOfConcept._isEnabled || !proofOfConcept._button._isEnabled) return false;
+            if (!proofOfConcept._isEnabled) return false;
             return true;
         },
 
@@ -183,7 +178,6 @@ define([
             if (this.isStepLockFinished) return;
 
             this.isStepLocked = false;
-            this.allowVisible = false;
             this.allowEnabled = false;
 
             if (this.isButtonEnabled()) {
@@ -196,7 +190,6 @@ define([
                     this.isStepLockFinished = true;
                 }
 
-                this.allowVisible = true;
                 this.allowEnabled = true;
             }
 
@@ -209,32 +202,12 @@ define([
             this.isStepLocked = false;
             this.isStepLockFinished = true;
             Adapt.trigger("proof-of-concept:goNext");
-            var proofOfConcept = this.model.get("_proofOfConcept");
-            switch (proofOfConcept._button._styleAfterClick) {
-            case "hidden":
-                this.allowVisible = false;
-                this.setButtonVisible(false);
-                break;
-            case "disabled":
-                this.allowEnabled = false;
-                this.setButtonVisible(true);
-            }
         },
 
         onPrevButtonClick: function() {
             this.isStepLocked = false;
             this.isStepLockFinished = true;
             Adapt.trigger("proof-of-concept:goPrev");
-            var proofOfConcept = this.model.get("_proofOfConcept");
-            switch (proofOfConcept._button._styleAfterClick) {
-            case "hidden":
-                this.allowVisible = false;
-                this.setButtonVisible(false);
-                break;
-            case "disabled":
-                this.allowEnabled = false;
-                this.setButtonVisible(true);
-            }
         },
 
         onUpdate: function() {
@@ -242,7 +215,7 @@ define([
             this.setButtonVisible(true);
             
             var $original = this.$el;
-            var $newEl = $(Handlebars.templates['next-page-button'](this.model.toJSON()));
+            var $newEl = $(Handlebars.templates['navigate-buttons'](this.model.toJSON()));
             $original.replaceWith($newEl);
 
             this.setElement($newEl);
@@ -263,7 +236,6 @@ define([
         onKill: function() {
             this.isStepLocked = false;
             this.isStepLocking = false;
-            this.allowVisible = false;
             this.allowEnabled = false;
             this.isStepLockFinished = true;
             this.checkButtonEnabled();

@@ -7,6 +7,8 @@ define([
 
         buttonViews: null,
 
+        counter: 0,
+
         initialize: function() {
             this.listenToOnce(Adapt, {
                 "app:dataReady": this.onAppDataReady,
@@ -30,7 +32,7 @@ define([
             //setup button on prerender to allow it to control the steplocking process
             if (!this.isProofOfConceptEnabled(view.model)) return;
 
-            this.setupConfigDefaults(view.model);
+            this.setupConfigDefaults(view.model, this.counter++);
 
             this.buttonViews[view.model.get("_id")] = new ButtonView({
                 model: view.model
@@ -53,21 +55,40 @@ define([
             return true;
         },
 
-        setupConfigDefaults: function(model) {
+        setupConfigDefaults: function(model, counter) {
             if (model.get("_isProofOfConceptButtonConfigured")) return;
 
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(model);
             proofOfConcept._button = _.extend({
-                "_isEnabled": true,
-                "_styleBeforeCompletion": "hidden",
-                "_styleAfterClick": "hidden",
-                "ariaLabel": "Go to next page",
-                "buttonText": "Next page",
-                "_component": "next-page-button",
-                "_isLocking": true,
-                "_isVisible": false,
-                "_isDisabled": false
+                "prev": {
+                    "_isEnabled": true,
+                    "_style": "disabled",
+                    "text": "Prev page",
+                    "_isVisible": true,
+                    "_isDisabled": false
+                },
+                "next": {
+                    "_styleBeforeCompletion": "disabled",   // default is "disabled" 
+                    "text": "Next page",
+                    "_isVisible": true,
+                    "_isDisabled": true
+                },
+                "_component": "navigate-buttons",
+                "_isLocking": true
             }, proofOfConcept._button);
+
+            if (!counter) {
+
+                if (proofOfConcept._button.prev._style == "disabled") {
+                    proofOfConcept._button.prev._isDisabled = true;
+                } else {
+                    proofOfConcept._button.prev._isVisible = false;
+                }
+
+            } else {
+                proofOfConcept._button.prev._isVisible = true;
+                proofOfConcept._button.prev._isDisabled = false;
+            }
 
             Adapt.proofOfConcept.setModelConfig(model, proofOfConcept);
             model.set("_isProofOfConceptButtonConfigured", true);
@@ -76,6 +97,7 @@ define([
 
         onRemove: function() {
             this.buttonViews = {};
+            this.counter = 0;
         }
 
     }, Backbone.Events);

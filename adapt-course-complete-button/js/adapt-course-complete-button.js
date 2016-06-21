@@ -22,8 +22,12 @@ define([
                 this.completeButtonView = new CompleteButtonView({
                     model: this.buttonSettings
                 });
-                $(".block:last-child").append(this.completeButtonView.$el);
+                $(".block").last().append(this.completeButtonView.$el);
             }
+        },
+
+        onGetLastBlock: function(view) {
+            console.log("Check this", Adapt, view);
         },
 
         onAppDataReady: function() {

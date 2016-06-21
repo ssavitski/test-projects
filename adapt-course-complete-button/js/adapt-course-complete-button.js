@@ -22,7 +22,7 @@ define([
                 this.completeButtonView = new CompleteButtonView({
                     model: this.buttonSettings
                 });
-                $(".article-container").append(this.completeButtonView.$el);
+                $(".block:last-child").append(this.completeButtonView.$el);
             }
         },
 

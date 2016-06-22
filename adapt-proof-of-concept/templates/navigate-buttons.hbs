@@ -1,31 +1,31 @@
 <div class="component {{_proofOfConcept._button._component}}-component {{_proofOfConcept._button._component}}-component-{{_id}}">
-	<div class="{{_proofOfConcept._button._component}}-inner component-inner{{#if _proofOfConcept._button._isLocking}} locking{{/if}}">
-		{{#if _proofOfConcept._button.prev._isEnabled}}
-			<button role="button" class="button-prev button {{#if (and 
-        	(eq _proofOfConcept._button.prev._style 'hidden')
-        	(ne _proofOfConcept._button.prev._isVisible true)
-        )}} display-none{{/if}} " {{#if (and 
-        	(eq _proofOfConcept._button.prev._style 'disabled')
-        	_proofOfConcept._button.prev._isDisabled
-        )}} disabled="disabled"{{/if}}>
-		        {{{_proofOfConcept._button.prev.text}}}
-		    </button>
-		{{/if}}
-        <button role="button" class="{{#if (and 
-                _proofOfConcept._button.next.finalText 
-                _proofOfConcept._isFinal
-        )}} button-complete {{else}} button-next {{/if}} button {{#if (and 
-        	(eq _proofOfConcept._button.next._styleBeforeCompletion 'hidden')
-        	(ne _proofOfConcept._button.next._isVisible true)
-        )}}display-none{{/if}} " {{#if (and 
-        	(eq _proofOfConcept._button.next._styleBeforeCompletion 'disabled')
-        	_proofOfConcept._button.next._isDisabled
-        )}} disabled="disabled"{{/if}}>
-                {{#if (and _proofOfConcept._button.next.finalText _proofOfConcept._isFinal)}}
-                        {{{_proofOfConcept._button.next.finalText}}}
-                {{else}}
-                        {{{_proofOfConcept._button.next.text}}}
-                {{/if}}
-        </button>
-	</div>
+  <div class="{{_proofOfConcept._button._component}}-inner component-inner{{#if _proofOfConcept._button._isLocking}} locking{{/if}}">
+    {{#if _proofOfConcept._button.prev._isEnabled}}
+      <button role="button" class="button-prev button {{#if (and
+        (eq _proofOfConcept._button.prev._style 'hidden')
+        (ne _proofOfConcept._button.prev._isVisible true)
+      )}} display-none{{/if}} " {{#if (and
+        (eq _proofOfConcept._button.prev._style 'disabled')
+        _proofOfConcept._button.prev._isDisabled
+      )}} disabled="disabled"{{/if}}>
+        {{{_proofOfConcept._button.prev.text}}}
+      </button>
+    {{/if}}
+    <button role="button" class="{{#if (and
+      _proofOfConcept._button.next.finalText
+      _proofOfConcept._isFinal
+    )}} button-complete {{else}} button-next {{/if}} button {{#if (and
+      (eq _proofOfConcept._button.next._styleBeforeCompletion 'hidden')
+      (ne _proofOfConcept._button.next._isVisible true)
+    )}}display-none{{/if}} " {{#if (and
+      (eq _proofOfConcept._button.next._styleBeforeCompletion 'disabled')
+      _proofOfConcept._button.next._isDisabled
+    )}} disabled="disabled"{{/if}}>
+      {{#if (and _proofOfConcept._button.next.finalText _proofOfConcept._isFinal)}}
+        {{{_proofOfConcept._button.next.finalText}}}
+      {{else}}
+        {{{_proofOfConcept._button.next.text}}}
+      {{/if}}
+    </button>
+  </div>
 </div>

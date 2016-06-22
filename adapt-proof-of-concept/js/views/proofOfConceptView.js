@@ -1,88 +1,88 @@
 define([
-    'coreJS/adapt'
-], function(Adapt) {
+  'coreJS/adapt'
+], function (Adapt) {
 
-    var ProofOfConceptView = Backbone.View.extend({
+  var ProofOfConceptView = Backbone.View.extend({
 
-        isSteplocked: false,
+    isSteplocked: false,
 
-        initialize: function(options) {
-            this.setupEventListeners();
-        },
+    initialize: function (options) {
+      this.setupEventListeners();
+    },
 
-        setupEventListeners: function() {
-            var AdaptEvents = {
-                "proof-of-concept:kill": this.onKill,
-                "remove": this.onRemove
-            };
-            
-            this.onPreRender(this);
+    setupEventListeners: function () {
+      var AdaptEvents = {
+        "proof-of-concept:kill": this.onKill,
+        "remove": this.onRemove
+      };
 
-            AdaptEvents[this.model.get("_type") + "View:postRender"] = this.onPostRender;
-            this.listenTo(Adapt, AdaptEvents);
+      this.onPreRender(this);
 
-            this.on("steplock", this.onStepLock);
-            this.on("stepunlock", this.onStepUnlock);
-        },
+      AdaptEvents[this.model.get("_type") + "View:postRender"] = this.onPostRender;
+      this.listenTo(Adapt, AdaptEvents);
 
-        onPreRender: function(view) {
-            if (!this.isElementEnabled()) return;
+      this.on("steplock", this.onStepLock);
+      this.on("stepunlock", this.onStepUnlock);
+    },
 
-            Adapt.trigger("proof-of-concept:preRender", this);
-        },
+    onPreRender: function (view) {
+      if (!this.isElementEnabled()) return;
 
-        onPostRender: function(view) {
-            if (view.model.get("_id") !== this.model.get("_id")) return;
-            if (!this.isElementEnabled()) return;
+      Adapt.trigger("proof-of-concept:preRender", this);
+    },
 
-            Adapt.trigger("proof-of-concept:postRender", this);
-        },
+    onPostRender: function (view) {
+      if (view.model.get("_id") !== this.model.get("_id")) return;
+      if (!this.isElementEnabled()) return;
 
-        isElementEnabled: function() {
-            var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
-            if (!proofOfConcept) return false;
+      Adapt.trigger("proof-of-concept:postRender", this);
+    },
 
-            var isArticleWithOnChildren = (this.model.get("_type") === "article" && proofOfConcept._onChildren);
-            if (isArticleWithOnChildren) {
-                return false;
-            }
+    isElementEnabled: function () {
+      var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
+      if (!proofOfConcept) return false;
 
-            if (proofOfConcept._isEnabled === true) return true;
-            return false;
-        },
+      var isArticleWithOnChildren = (this.model.get("_type") === "article" && proofOfConcept._onChildren);
+      if (isArticleWithOnChildren) {
+        return false;
+      }
 
-        onStepLock: function() {
-            if (!this.isElementEnabled()) {
-                this.continueToNext();
-                return;
-            }
+      if (proofOfConcept._isEnabled === true) return true;
+      return false;
+    },
 
-            var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
-            var isSteplocking = (proofOfConcept._stepLocking && proofOfConcept._stepLocking._isEnabled);
-            if (!isSteplocking) {
-                this.continueToNext();
-                return;
-            }
+    onStepLock: function () {
+      if (!this.isElementEnabled()) {
+        this.continueToNext();
+        return;
+      }
 
-            Adapt.trigger("proof-of-concept:steplock", this);
+      var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
+      var isSteplocking = (proofOfConcept._stepLocking && proofOfConcept._stepLocking._isEnabled);
+      if (!isSteplocking) {
+        this.continueToNext();
+        return;
+      }
 
-            this.isSteplocked = true;
-        },  
+      Adapt.trigger("proof-of-concept:steplock", this);
 
-        continueToNext: function() {
-            _.defer(_.bind(function() {
-                Adapt.trigger("proof-of-concept:continue", this);
-            }, this));
-        },
+      this.isSteplocked = true;
+    },
 
-        onStepUnlock: function() {
-            if (!this.isSteplocked) return;
-            this.isSteplocked = false;
-            Adapt.trigger("proof-of-concept:stepunlock", this);
-        }
+    continueToNext: function () {
+      _.defer(_.bind(function () {
+        Adapt.trigger("proof-of-concept:continue", this);
+      }, this));
+    },
 
-    });
+    onStepUnlock: function () {
+      if (!this.isSteplocked) return;
+      this.isSteplocked = false;
+      Adapt.trigger("proof-of-concept:stepunlock", this);
+    }
 
-    return ProofOfConceptView;
+  });
+
+  return ProofOfConceptView;
 
 })

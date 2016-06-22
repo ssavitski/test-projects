@@ -1,6 +1,6 @@
 define([
     'coreJS/adapt',
-    './buttonView'
+    '../views/buttonView'
 ], function(Adapt, ButtonView) {
 
     var ProofOfConceptButtonHandler = _.extend({
@@ -25,6 +25,7 @@ define([
             this.listenTo(Adapt, {
                 "proof-of-concept:preRender": this.onPreRender,
                 "proof-of-concept:postRender": this.onPostRender,
+                "proof-of-concept:finished": this.onRemove
             });
         },
 
@@ -56,26 +57,8 @@ define([
         },
 
         setupConfigDefaults: function(model, counter) {
-            if (model.get("_isProofOfConceptButtonConfigured")) return;
 
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(model);
-            proofOfConcept._button = _.extend({
-                "prev": {
-                    "_isEnabled": true,
-                    "_style": "disabled",
-                    "text": "Prev page",
-                    "_isVisible": true,
-                    "_isDisabled": false
-                },
-                "next": {
-                    "_styleBeforeCompletion": "disabled",   // default is "disabled" 
-                    "text": "Next page",
-                    "_isVisible": true,
-                    "_isDisabled": true
-                },
-                "_component": "navigate-buttons",
-                "_isLocking": true
-            }, proofOfConcept._button);
 
             if (!counter) {
 
@@ -89,6 +72,27 @@ define([
                 proofOfConcept._button.prev._isVisible = true;
                 proofOfConcept._button.prev._isDisabled = false;
             }
+
+            if (model.get("_isProofOfConceptButtonConfigured")) return;
+
+            proofOfConcept._button = _.extend({
+                "prev": {
+                    "_isEnabled": true,
+                    "_style": "disabled",
+                    "text": "Prev page",
+                    "_isVisible": true,
+                    "_isDisabled": false
+                },
+                "next": {
+                    "_styleBeforeCompletion": "disabled",   // default is "disabled" 
+                    "text": "Next page",
+                    "finalText": "Complete Activity",
+                    "_isVisible": true,
+                    "_isDisabled": true
+                },
+                "_component": "navigate-buttons",
+                "_isLocking": true
+            }, proofOfConcept._button);
 
             Adapt.proofOfConcept.setModelConfig(model, proofOfConcept);
             model.set("_isProofOfConceptButtonConfigured", true);

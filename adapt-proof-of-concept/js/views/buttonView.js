@@ -29,10 +29,11 @@ define([
         },
 
         setupButtonVisible: function() {
+            var interactionComplete = this.model.get(completionAttribute);
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
             
             if (proofOfConcept._button.next._styleBeforeCompletion === "hidden") {
-                proofOfConcept._button.next._isVisible = false;
+                proofOfConcept._button.next._isVisible = (interactionComplete) ? true : false;
             } else {
                 proofOfConcept._button.next._isVisible = true;
             }
@@ -40,13 +41,14 @@ define([
 
         setupButtonEnabled: function() {
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
+            var interactionComplete = this.model.get(completionAttribute);
             
             if (proofOfConcept._stepLocking._isCompletionRequired === false) {
                 this.allowEnabled = true;
                 proofOfConcept._button.next._isDisabled = false;   
             } else if (proofOfConcept._button.next._styleBeforeCompletion === "disabled") {
                 this.allowEnabled = false;
-                proofOfConcept._button.next._isDisabled = true;
+                proofOfConcept._button.next._isDisabled = (interactionComplete) ? false : true;
             } else {
                 proofOfConcept._button.next._isDisabled = false;
                 this.allowEnabled = true;
@@ -56,7 +58,8 @@ define([
         
         events: {
             "click .button-next": "onNextButtonClick",
-            "click .button-prev": "onPrevButtonClick"
+            "click .button-prev": "onPrevButtonClick",
+            "click .button-complete": "onCompleteButtonClick"
         },
 
         initialize: function(options) {
@@ -101,11 +104,9 @@ define([
             if (!bool) {
                 this.$(".button-next").addClass("display-none");
                 proofOfConcept._button.next._isVisible = false;
-                //console.log("trickle hiding button", this.model.get("_id"));
             } else {
                 this.$(".button-next").removeClass("display-none");
                 proofOfConcept._button.next._isVisible = true;
-                //console.log("trickle showing button", this.model.get("_id"));
             }
         },
 
@@ -120,10 +121,10 @@ define([
         setButtonEnabled: function(bool) {
             var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
             if (bool) {
-                this.$(".button-next").removeClass("disabled").removeAttr("disabled");
+                this.$(".button-next, .button-complete").removeClass("disabled").removeAttr("disabled");
                 proofOfConcept._button.next._isDisabled = true;
             } else {
-                this.$(".button-next").addClass("disabled").attr("disabled", "disabled");
+                this.$(".button-next, .button-complete").addClass("disabled").attr("disabled", "disabled");
                 proofOfConcept._button.next._isDisabled = false;
             }
         },
@@ -193,7 +194,7 @@ define([
                 this.allowEnabled = true;
             }
 
-            this.checkButtonEnabled();
+            this.checkButtonEnabled(true);
             this.setButtonVisible(true);
 
         },
@@ -208,6 +209,11 @@ define([
             this.isStepLocked = false;
             this.isStepLockFinished = true;
             Adapt.trigger("proof-of-concept:goPrev");
+        },
+
+        onCompleteButtonClick: function() {
+            // Adapt.trigger('navigation:backButton');
+            window.top.postMessage('exit', '*');
         },
 
         onUpdate: function() {

@@ -13,6 +13,7 @@
         "next": {
             "_styleBeforeCompletion": "disabled",   
             "text": "Next page",
+            "finalText": "Finish"
             "_isVisible": true,
             "_isDisabled": true
         },              

@@ -11,14 +11,21 @@
 		        {{{_proofOfConcept._button.prev.text}}}
 		    </button>
 		{{/if}}
-        <button role="button" class="button-next button {{#if (and 
+        <button role="button" class="{{#if (and 
+                _proofOfConcept._button.next.finalText 
+                _proofOfConcept._isFinal
+        )}} button-complete {{else}} button-next {{/if}} button {{#if (and 
         	(eq _proofOfConcept._button.next._styleBeforeCompletion 'hidden')
         	(ne _proofOfConcept._button.next._isVisible true)
         )}}display-none{{/if}} " {{#if (and 
         	(eq _proofOfConcept._button.next._styleBeforeCompletion 'disabled')
         	_proofOfConcept._button.next._isDisabled
         )}} disabled="disabled"{{/if}}>
-	        {{{_proofOfConcept._button.next.text}}}
+                {{#if (and _proofOfConcept._button.next.finalText _proofOfConcept._isFinal)}}
+                        {{{_proofOfConcept._button.next.finalText}}}
+                {{else}}
+                        {{{_proofOfConcept._button.next.text}}}
+                {{/if}}
         </button>
 	</div>
 </div>

@@ -10,7 +10,6 @@ define([
     './helpers/adapt-proof-of-concept-helper',
     './lib/adaptModelExtension',
     './handlers/button',
-    './handlers/completion',
     './handlers/visibility'
 ], function(Backbone, Adapt, PageView, ProofOfConceptHelper) {
 

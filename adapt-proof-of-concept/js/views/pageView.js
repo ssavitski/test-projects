@@ -82,9 +82,6 @@ define([
             articleBlocks.each(function(blockModel, index) {
                 var blockProofOfConceptConfig = Adapt.proofOfConcept.getModelConfig(blockModel);
 
-                //overlay block trickle on article trickle
-                //this allows values to carry through from the article to the block 
-                //retains any value overriden in the block
                 for (var k in blockProofOfConceptConfig) {
                     if (typeof blockProofOfConceptConfig[k] === "object") {
                         blockProofOfConceptConfig[k] = _.extend({}, articleProofOfConceptConfig[k], blockProofOfConceptConfig[k]);
@@ -93,13 +90,8 @@ define([
 
                 blockProofOfConceptConfig = _.extend({}, articleProofOfConceptConfig, blockProofOfConceptConfig);
 
-
-                //setup start/final config
                 if (articleBlocks.length === index+1) {
                     blockProofOfConceptConfig._isFinal = true;
-                }
-                if (index === 0) {
-                    blockProofOfConceptConfig._isStart = true;
                 }
 
                 Adapt.proofOfConcept.setModelConfig(blockModel, blockProofOfConceptConfig);
@@ -110,8 +102,6 @@ define([
         addClassToHtml: function() {
             $("html").addClass("proof-of-concept");
         },
-
-        //trickle lifecycle
 
         onPageReady: function(model, value) {
             if (!value) return;
@@ -195,8 +185,6 @@ define([
         	this.currentDescendant.trigger("steplock");
         	this.currentLocksOnDescendant--;
             if (this.currentLocksOnDescendant > 0) return;
-            
-            var lastDescendant = this.currentDescendant.model;
             
             this.currentDescendantIndex++;
             this.gotoNextDescendant();

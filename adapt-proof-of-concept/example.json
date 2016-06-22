@@ -1,0 +1,22 @@
+//put in article.json
+"_proofOfConcept": {
+  "_isEnabled": true,
+  "_onChildren": true,
+  "_buttons": {
+    "prev": {
+      "_isEnabled": true,
+      "_style": "disabled",
+      "text": "Prev page"
+    },
+    "next": {
+      "_styleBeforeCompletion": "disabled",
+      "text": "Next page",
+      "finalText": "Complete Activity"
+    },
+    "_component": "navigate-buttons"
+  },
+  "_stepLocking": {
+    "_isEnabled": true,
+    "_isCompletionRequired": true
+  }
+}

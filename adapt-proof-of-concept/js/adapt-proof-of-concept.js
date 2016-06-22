@@ -9,7 +9,7 @@ define([
   './views/pageView',
   './helpers/adapt-proof-of-concept-helper',
   './lib/adaptModelExtension',
-  './handlers/button',
+  './handlers/buttons',
   './handlers/visibility'
 ], function (Backbone, Adapt, PageView) {
 

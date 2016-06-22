@@ -193,7 +193,13 @@ define([
     },
 
     onContinue: function () {
-      console.log("Continue...");
+      if (!this.currentDescendant) return;
+      if (view.model.get("_id") !== this.currentDescendant.model.get("_id")) return;
+      
+      _.defer(_.bind(function() {
+        this.currentDescendantIndex++;
+        this.gotoNextDescendant();
+      }, this));
     },
 
     goPrev: function () {

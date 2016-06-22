@@ -2,23 +2,18 @@
 "_proofOfConcept": {
   "_isEnabled": true,
   "_onChildren": true,
-  "_button": {
+  "_buttons": {
     "prev": {
       "_isEnabled": true,
       "_style": "disabled",
-      "text": "Prev page",
-      "_isVisible": true,
-      "_isDisabled": false
+      "text": "Prev page"
     },
     "next": {
       "_styleBeforeCompletion": "disabled",
       "text": "Next page",
-      "finalText": "Finish"
-      "_isVisible": true,
-      "_isDisabled": true
+      "finalText": "Complete Activity"
     },
-    "_component": "navigate-buttons",
-    "_isLocking": true
+    "_component": "navigate-buttons"
   },
   "_stepLocking": {
     "_isEnabled": true,

@@ -10,7 +10,6 @@ define([
 
     isStepLocking: false,
     hasStepLocked: false,
-    isStepLocked: false,
     isStepLockFinished: false,
     hasStepPreCompleted: false,
     allowEnabled: true,
@@ -30,10 +29,10 @@ define([
       var interactionComplete = this.model.get(completionAttribute);
       var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
 
-      if (proofOfConcept._button.next._styleBeforeCompletion === "hidden") {
-        proofOfConcept._button.next._isVisible = (interactionComplete) ? true : false;
+      if (proofOfConcept._buttons.next._styleBeforeCompletion === "hidden") {
+        proofOfConcept._buttons.next._isVisible = (interactionComplete) ? true : false;
       } else {
-        proofOfConcept._button.next._isVisible = true;
+        proofOfConcept._buttons.next._isVisible = true;
       }
     },
 
@@ -43,12 +42,12 @@ define([
 
       if (proofOfConcept._stepLocking._isCompletionRequired === false) {
         this.allowEnabled = true;
-        proofOfConcept._button.next._isDisabled = false;
-      } else if (proofOfConcept._button.next._styleBeforeCompletion === "disabled") {
+        proofOfConcept._buttons.next._isDisabled = false;
+      } else if (proofOfConcept._buttons.next._styleBeforeCompletion === "disabled") {
         this.allowEnabled = false;
-        proofOfConcept._button.next._isDisabled = (interactionComplete) ? false : true;
+        proofOfConcept._buttons.next._isDisabled = (interactionComplete) ? false : true;
       } else {
-        proofOfConcept._button.next._isDisabled = false;
+        proofOfConcept._buttons.next._isDisabled = false;
         this.allowEnabled = true;
       }
     },
@@ -61,7 +60,6 @@ define([
 
     initialize: function (options) {
       this.getCompletionAttribute();
-      this.setupStepLocking();
       this.setupEventListeners();
     },
 
@@ -71,16 +69,6 @@ define([
       if (!proofOfConcept) return;
       if (proofOfConcept._completionAttribute) {
         completionAttribute = proofOfConcept._completionAttribute
-      }
-    },
-
-    setupStepLocking: function () {
-      var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
-
-      if (proofOfConcept._stepLocking._isEnabled) {
-        this.isStepLocked = true;
-      } else {
-        this.isStepLocked = false;
       }
     },
 
@@ -103,10 +91,10 @@ define([
 
       if (!bool) {
         this.$(".button-next").addClass("display-none");
-        proofOfConcept._button.next._isVisible = false;
+        proofOfConcept._buttons.next._isVisible = false;
       } else {
         this.$(".button-next").removeClass("display-none");
-        proofOfConcept._button.next._isVisible = true;
+        proofOfConcept._buttons.next._isVisible = true;
       }
     },
 
@@ -123,10 +111,10 @@ define([
 
       if (bool) {
         this.$(".button-next, .button-complete").removeClass("disabled").removeAttr("disabled");
-        proofOfConcept._button.next._isDisabled = true;
+        proofOfConcept._buttons.next._isDisabled = true;
       } else {
         this.$(".button-next, .button-complete").addClass("disabled").attr("disabled", "disabled");
-        proofOfConcept._button.next._isDisabled = false;
+        proofOfConcept._buttons.next._isDisabled = false;
       }
     },
 
@@ -140,11 +128,8 @@ define([
         var isCompleteAndShouldRelock = (this.model.get(completionAttribute));
 
         if (isCompleteAndShouldRelock) {
-          this.isStepLocked = true;
           this.setButtonVisible(true);
         } else if (this.hasStepPreCompleted) {
-          //force the button to show if section completed before it was steplocked
-          this.isStepLocked = true;
           this.stepCompleted();
         }
       }
@@ -176,13 +161,10 @@ define([
     stepCompleted: function () {
       if (this.isStepLockFinished) return;
 
-      this.isStepLocked = false;
       this.allowEnabled = false;
 
       if (this.isButtonEnabled()) {
-        if (this.isStepLocking) {
-          this.isStepLocked = true;
-        } else {
+        if (!this.isStepLocking) {
           this.isStepLockFinished = true;
         }
 
@@ -194,13 +176,11 @@ define([
     },
 
     onNextButtonClick: function () {
-      this.isStepLocked = false;
       this.isStepLockFinished = true;
       Adapt.trigger("proof-of-concept:goNext");
     },
 
     onPrevButtonClick: function () {
-      this.isStepLocked = false;
       this.isStepLockFinished = true;
       Adapt.trigger("proof-of-concept:goPrev");
     },
@@ -231,7 +211,6 @@ define([
     },
 
     onKill: function () {
-      this.isStepLocked = false;
       this.isStepLocking = false;
       this.allowEnabled = false;
       this.isStepLockFinished = true;

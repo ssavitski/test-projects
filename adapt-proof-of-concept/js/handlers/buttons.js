@@ -60,37 +60,32 @@ define([
 
       if (!counter) {
 
-        if (proofOfConcept._button.prev._style == "disabled") {
-          proofOfConcept._button.prev._isDisabled = true;
+        if (proofOfConcept._buttons.prev._style == "disabled") {
+          proofOfConcept._buttons.prev._isDisabled = true;
         } else {
-          proofOfConcept._button.prev._isVisible = false;
+          proofOfConcept._buttons.prev._isVisible = false;
         }
 
       } else {
-        proofOfConcept._button.prev._isVisible = true;
-        proofOfConcept._button.prev._isDisabled = false;
+        proofOfConcept._buttons.prev._isVisible = true;
+        proofOfConcept._buttons.prev._isDisabled = false;
       }
 
       if (model.get("_isProofOfConceptButtonConfigured")) return;
 
-      proofOfConcept._button = _.extend({
+      proofOfConcept._buttons = _.extend({
         "prev": {
           "_isEnabled": true,
           "_style": "disabled",
-          "text": "Prev page",
-          "_isVisible": true,
-          "_isDisabled": false
+          "text": "Prev page"
         },
         "next": {
           "_styleBeforeCompletion": "disabled",   // default is "disabled"
           "text": "Next page",
-          "finalText": "Complete Activity",
-          "_isVisible": true,
-          "_isDisabled": true
+          "finalText": "Complete Activity"
         },
-        "_component": "navigate-buttons",
-        "_isLocking": true
-      }, proofOfConcept._button);
+        "_component": "navigate-buttons"
+      }, proofOfConcept._buttons);
 
       Adapt.proofOfConcept.setModelConfig(model, proofOfConcept);
       model.set("_isProofOfConceptButtonConfigured", true);

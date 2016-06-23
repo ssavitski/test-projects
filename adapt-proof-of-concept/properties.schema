@@ -74,7 +74,7 @@
                           "title": "Button Text",
                           "inputType": "Text",
                           "validators": []
-                        },
+                        }
                       }
                     },
                     "next":{
@@ -197,7 +197,7 @@
                           "title": "Button Text",
                           "inputType": "Text",
                           "validators": []
-                        },
+                        }
                       }
                     },
                     "next":{
@@ -244,15 +244,15 @@
                     "_isEnabled": {
                       "type":"boolean",
                       "required":false,
-                      "default": true,
-                      "title": "Enabled",
+                      "default":true,
+                      "title":"Enabled",
                       "inputType": { "type": "Boolean", "options": [false, true]},
                       "validators": []
                     },
                     "_isCompletionRequired": {
                       "type":"boolean",
                       "required":false,
-                      "default": true,
+                      "default":true,
                       "title": "Completion Required",
                       "inputType": { "type": "Boolean", "options": [false, true]},
                       "validators": []

@@ -1,5 +1,5 @@
 /*
- * adapt-course-complete-button
+ * adapt-proof-of-concept
  * License
  * Maintainers - Siarhei Savitski <siarhei.savitski@instinctools.ru>
  */

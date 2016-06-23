@@ -5,7 +5,9 @@
   ],
   "version": "1.0.0",
   "framework": ">2.0.0",
-  "description": "An extension that allows an author to create a wizard-style experience using adapt. This extension unlock content on new 'pages', one for each content block. The experience is like flipping through a book rather than reading one long single-page document.",
+  "displayName" : "Proof of Concept",
+  "extension": "proof-of-concept",
+  "description": "An extension allows to navigate through blocks or articles using next or prev page buttons.",
   "main": "/js/adapt-proof-of-concept.js",
   "keywords": [
     "adapt-plugin",

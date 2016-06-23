@@ -45,7 +45,7 @@
                       "title": "",
                       "inputType": "Text",
                       "validators": []
-                    },
+                    }
                   }
                 }
               }

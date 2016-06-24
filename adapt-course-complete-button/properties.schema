@@ -17,32 +17,32 @@
             "_settings": {
               "type": "object",
               "required": false,
-              "legend": "Button Settings",
+              "legend": "Complete Button Settings",
               "properties": {
                 "_isEnabled": {
                   "type": "boolean",
                   "required":true,
                   "default": true,
-                  "title": "Is enabled",
+                  "title": "Enabled",
                   "inputType": {"type": "Boolean", "options": [true, false]},
                   "validators": [],
                   "help": "If set to 'false', Complete Activity button will not be shown on the page"
                 },
                 "_completeButton": {
                   "type":"object",
-                  "title": "Complete button properties",
+                  "title": "Properties",
                   "properties": {
                     "ariaLabel": {
                       "type": "string",
-                      "default": "Documents",
-                      "title": "",
+                      "default": "Complete Activity and navigate back by clicking here.",
+                      "title": "Button area label",
                       "inputType": "Text",
                       "validators": []
                     },
                     "buttonText": {
                       "type": "string",
-                      "default": "Media",
-                      "title": "",
+                      "default": "Complete Activity",
+                      "title": "Button caption",
                       "inputType": "Text",
                       "validators": []
                     }

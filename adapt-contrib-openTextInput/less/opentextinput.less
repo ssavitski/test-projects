@@ -3,33 +3,39 @@
 .openTextInput-component {
     .openTextInput-count-characters {
         background: @primary-color;
-        padding: 10px;
+        padding: 4px 10px;
+        float: right;
+        font-size: @body-text-font-size - 2;
         position: relative;
         color: @white;
         .openTextInput-count-amount {
             font-weight: bold;
         }
-        .openTextInput-autosave {
-            color: @white;
-            display: inline-block;
-            font-size: 12px;
-            margin-right: 10px;
-            position: absolute;
-            right: 0;
-            style: italic;
-        }
+    }
+    .openTextInput-autosave {
+        color: @black;
+        background-color: @white;
+        display: inline-block;
+        font-size: @body-text-font-size - 2;
+        margin: 1px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 5px;
     }
     .openTextInput-answer-container {
         border: none;
+        position: relative;
     }
     .openTextInput-item-textbox {
-        border: none;
+        border: 1px solid @black;
+        box-sizing: border-box;
         color: @primary-color;
         display: block;
         margin: 0;
         padding: 1%;
         resize: none;
-        width: 98%;
+        width: 100%;
     }
     .buttons {
         font-size: 0;
@@ -78,6 +84,15 @@
             @media all and (max-width: (@device-width-medium - 1px)) {
                 width: 100%;
             }
+        }
+        .buttons-marking-icon {
+            left: 100%;
+        }
+        .buttons-feedback {
+            display: none;
+        }
+        .buttons-action {
+            width: 100%;
         }
     }
 }

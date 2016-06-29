@@ -141,7 +141,7 @@ define(function(require) {
         this.$('.buttons-action').a11y_cntrl_enabled(true);
 
         if (this.model.get('_buttonState') == 'correct') {
-          this.model.set('_buttonState', 'showCorrectAnswer');
+          this.model.set('_buttonState', 'showModelAnswer');
         } else {
           this.model.set('_buttonState', 'hideCorrectAnswer');
         }
@@ -170,7 +170,7 @@ define(function(require) {
     },
 
     hideCorrectAnswer: function() {
-      this.model.set('_buttonState', 'showCorrectAnswer');
+      this.model.set('_buttonState', 'showModelAnswer');
       this.updateActionButton(this.model.get('_buttons').showModelAnswer);
 
       if (this.$textbox === undefined) {
@@ -201,7 +201,7 @@ define(function(require) {
      * Used by adapt-contrib-spoor to get the type of this question in the format required by the cmi.interactions.n.type data field
      */
     getResponseType: function() {
-      return "long-fill-in";
+      return "fill-in";
     }
   });
 

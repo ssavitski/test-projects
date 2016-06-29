@@ -60,6 +60,56 @@ define(function(require) {
       $(window).unload(_.bind(this.xapiEnd, this));
     },
 
+    onTrackData: function(data) {
+      var component = data.component;
+      var xAPI = data.xAPI;
+
+      switch(component.get('_component')) {
+        case 'mcq':
+        case 'gmcq':
+        case 'openTextInput': xAPI.onComponentTrackData(component);
+      }
+    },
+
+    onComponentTrackData: function(component) {
+      var state = this.get('state') || {};
+
+      if (!state.components) {
+        state.components = [];
+      }
+
+      var componentStateRecorded = _.find(state.components, function findComponent(b) {
+        return b._id == component.get('_id');
+      });
+
+      if (!componentStateRecorded) {
+        switch(component.get('_component')) {
+          case 'mcq':
+          case 'gmcq': {
+            state.components.push({
+              _id: component.get('_id'),
+              _componentName: component.get('_component'),
+              _attemptsMade: component.get('_attempts') - component.get('_attemptsLeft'),
+              _numberOfCorrectAnswers: component.get('_numberOfCorrectAnswers'),
+              _numberOfRequiredAnswers: component.get('_numberOfRequiredAnswers'),
+              _isCorrect: component.get('_isCorrect')
+            });
+          } break;
+          case 'openTextInput': {
+            state.components.push({
+              _id: component.get('_id'),
+              _componentName: component.get('_component'),
+              _userAnswer: component.get('_userAnswer')
+            });
+          } break;
+        }
+
+        this.set('state', state);
+
+        Adapt.trigger('xapi:stateChanged');
+      }
+    },
+
     xapiEnd: function() {
       if (!this.validateParams()) {
         return;
@@ -82,6 +132,11 @@ define(function(require) {
     },
 
     onComponentComplete: function(component) {
+      this.onTrackData({
+        component: component,
+        xAPI: this
+      });
+
       if (component.get('_recordInteraction') !== false) {
         return;
       }
@@ -119,7 +174,7 @@ define(function(require) {
         state.blocks.push({
           _id: block.get('_id'),
           _trackingId: block.get('_trackingId'),
-          _isComplete: block.get('_isComplete'),
+          _isComplete: block.get('_isComplete')
         });
 
         this.set('state', state);
@@ -426,4 +481,17 @@ define(function(require) {
   Adapt.on('adapt:initialize', function() {
     xAPI.setupListeners();
   });
+
+  /*
+  Adapt.on('componentView:postRender', function(component) {
+
+    if (Boolean(component.buttonsView)) {
+      component.buttonsView.on('buttons:submit', xAPI.onTrackData, {
+        component: component,
+        xAPI: xAPI
+      });
+    }
+
+  });
+  */
 });

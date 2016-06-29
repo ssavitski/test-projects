@@ -191,7 +191,32 @@ define(function(require) {
       _.defer(_.bind(this.checkIfCourseIsReallyComplete, this));
     },
 
+    onAssessmentTrackData: function(assessment) {
+      var state = this.get('state') || {};
+
+      if (!state.assessmentData) {
+        state.assessmentData = [];
+      }
+
+      var assessmentDataStateRecorded = _.find(state.assessmentData, function findComponent(b) {
+        return b._id == assessment.get('_id');
+      });
+
+      if (!assessmentDataStateRecorded) {
+        state.assessmentData.push({
+          _id: assessment.id,
+          _questions: assessment.questions
+        });
+
+        this.set('state', state);
+
+        Adapt.trigger('xapi:stateChanged');
+      }
+    },
+
     onAssessmentComplete: function(assessment) {
+      this.onAssessmentTrackData(assessment);
+
       var statementModel = new AssessmentStatementModel({
         activityId: this.get('activityId'),
         actor: this.get('actor'),

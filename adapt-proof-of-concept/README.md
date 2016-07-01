@@ -11,7 +11,7 @@ Many things for this extension were taken form **Trickle** extension and were mo
 
 ### Attributes
 
-**_proofOfConcept** (object): The Proof Of Concept attributes group contains values for **_isEnabled**, **_onChildren**, **_buttons**, and **_stepLocking**.
+**_proofOfConcept** (object): The Proof Of Concept attributes group contains values for **_isEnabled**, **_onChildren**, **_buttons**, and **_isCompletionRequired**.
 
 >**_isEnabled** (boolean):  Turns on and off the **Proof of Concept** extension.
  
@@ -37,11 +37,7 @@ Many things for this extension were taken form **Trickle** extension and were mo
 
 >>**_component** (string):  Defines the Proof of Concept plug-in which should handle the interaction. At present only `"navigate-buttons"` is available, but it is possible to create new plug-ins. The default is `"navigate-buttons"`.
   
->**_stepLocking** (object):  Step locking (section hiding) attributes group contains values for **_isEnabled**, **_isCompletionRequired**, and **_isLockedOnRevisit**.  
-  
->>**_isEnabled** (boolean):  Will allow Proof of Concept to truncate the page at the step until the user is allowed to move forward. The default is `true`.
-  
->>**_isCompletionRequired** (boolean):  Forces the user to complete the block/article before the step is unlocked. The default is `true`.
+>**_isCompletionRequired** (boolean):  Forces the user to complete the block/article before the step is unlocked. The default is `true`.
   
 The following attribute can be added to *config.json* to overide which completion data attribute is used to test when the navigate buttons should be displayed.
   

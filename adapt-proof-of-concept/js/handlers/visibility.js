@@ -62,7 +62,7 @@ define([
 
           if (proofOfConceptType === "article" && descendant.get("_type") === "block") {
             //make sure article blocks are shown
-            if (descendant.get("_parentId") === proofOfConceptModelId) {
+            if ((descendant.get("_parentId") === proofOfConceptModelId) && !descendant.get("_isLocked")) {
               descendant.set("_isVisible", true, {pluginName: "proof-of-concept"});
               var components = descendant.findDescendants("components");
 

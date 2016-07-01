@@ -1,76 +1,80 @@
 {
-  "type":"object",
+  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema",
   "id": "http://jsonschema.net",
-  "required":false,
+  "required": false,
   "properties":{
     "pluginLocations": {
-      "type":"object",
-      "required":true,
+      "type": "object",
+      "required": true,
       "properties":{
-        "config": {
-          "type":"object"
+        "config":{
+          "type": "object"
         },
-        "course": {
-          "type":"object"
+        "course":{
+          "type": "object"
         },
         "contentobject": {
-          "type":"object"
+          "type": "object"
         },
-        "article": {
-          "type":"object",
+        "article":{
+          "type": "object",
           "properties":{
             "_proofOfConcept": {
-              "type":"object",
-              "required":false,
+              "type": "object",
+              "required": false,
               "legend": "Proof of Concept",
               "properties":{
                 "_isEnabled": {
-                  "type":"boolean",
-                  "required":false,
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
                   "title": "Enable Proof of Concept",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": {"type": "Boolean", "options": [false, true]},
                   "validators": []
                 },
                 "_onChildren": {
-                  "type":"boolean",
-                  "required":false,
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
                   "title": "Enable on Child Blocks",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": {"type": "Boolean", "options": [false, true]},
                   "validators": [],
                   "help": "Set to false on the article to use Proof of Concept at article level"
                 },
                 "_buttons": {
-                  "type":"object",
-                  "required":false,
+                  "type": "object",
+                  "required": false,
                   "title": "Buttons Settings",
                   "properties":{
                     "prev":{
-                      "type":"object",
-                      "required":false,
+                      "type": "object",
+                      "required": false,
                       "title": "Previous button Settings",
                       "properties":{
                         "_isEnabled": {
-                          "type":"boolean",
-                          "required":false,
+                          "type": "boolean",
+                          "required": false,
+                          "default": true,
                           "title": "Enabled",
-                          "inputType": { "type": "Boolean", "options": [false, true]},
-                          "validators": []
+                          "inputType": {"type": "Boolean", "options": [false, true]},
+                          "validators": [],
+                          "help": "Set to 'true' if button will be enabled on the page"
                         },
                         "_style": {
-                          "type":"string",
-                          "required":false,
+                          "type": "string",
+                          "required": false,
                           "enum": ["hidden", "disabled"],
-                          "default": "hidden",
+                          "default": "disabled",
                           "title": "Make button visible or disable",
                           "inputType": {"type": "Select", "options":["hidden", "disabled"]},
                           "validators": ["required"],
                           "help": "Set button visibility or disabling before completion"
                         },
                         "text": {
-                          "type":"string",
+                          "type": "string",
                           "required": false,
-                          "default": "Continue",
+                          "default": "Prev step",
                           "title": "Button Text",
                           "inputType": "Text",
                           "validators": []
@@ -78,24 +82,32 @@
                       }
                     },
                     "next":{
-                      "type":"object",
-                      "required":false,
+                      "type": "object",
+                      "required": false,
                       "title": "Next button Settings",
                       "properties":{
                         "_styleBeforeCompletion": {
-                          "type":"string",
-                          "required":false,
+                          "type": "string",
+                          "required": false,
                           "enum": ["hidden", "disabled"],
-                          "default": "hidden",
+                          "default": "disabled",
                           "title": "Make button visible or disable",
                           "inputType": {"type": "Select", "options":["hidden", "disabled"]},
                           "validators": ["required"],
                           "help": "Set button visibility or disabling before completion"
                         },
-                        "finalText": {
-                          "type":"string",
+                        "text": {
+                          "type": "string",
                           "required": false,
-                          "default": "Finish",
+                          "default": "Next step",
+                          "title": "Button Text",
+                          "inputType": "Text",
+                          "validators": []
+                        },
+                        "finalText": {
+                          "type": "string",
+                          "required": false,
+                          "default": "Complete Activity",
                           "title": "Final Button Text",
                           "inputType": "Text",
                           "validators": [],
@@ -107,34 +119,19 @@
                       "type":"string",
                       "required": false,
                       "default": "navigate-buttons",
-                      "title": "Proof of Concept Plugin",
+                      "title": "Component name",
                       "inputType": "Text",
                       "validators": []
                     }
                   }
                 },
-                "_stepLocking": {
-                  "type":"object",
-                  "required":false,
-                  "title": "Step Locking Attributes",
-                  "properties":{
-                    "_isEnabled": {
-                      "type":"boolean",
-                      "required":false,
-                      "default": true,
-                      "title": "Enabled",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
-                      "validators": []
-                    },
-                    "_isCompletionRequired": {
-                      "type":"boolean",
-                      "required":false,
-                      "default": true,
-                      "title": "Completion Required",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
-                      "validators": []
-                    }
-                  }
+                "_isCompletionRequired": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
+                  "title": "Completion Required",
+                  "inputType": {"type": "Boolean", "options": [false, true]},
+                  "validators": []
                 }
               }
             }
@@ -144,56 +141,60 @@
           "type":"object",
           "properties":{
             "_proofOfConcept": {
-              "type":"object",
-              "required":false,
+              "type": "object",
+              "required": false,
               "legend": "Proof of Concept",
               "properties":{
                 "_isEnabled": {
-                  "type":"boolean",
-                  "required":false,
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
                   "title": "Enable Proof of Concept",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": {"type": "Boolean", "options": [false, true]},
                   "validators": []
                 },
                 "_onChildren": {
-                  "type":"boolean",
-                  "required":false,
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
                   "title": "Enable on Child Blocks",
-                  "inputType": { "type": "Boolean", "options": [false, true]},
+                  "inputType": {"type": "Boolean", "options": [false, true]},
                   "validators": [],
                   "help": "Set to false on the article to use Proof of Concept at article level"
                 },
                 "_buttons": {
-                  "type":"object",
-                  "required":false,
+                  "type": "object",
+                  "required": false,
                   "title": "Buttons Settings",
                   "properties":{
                     "prev":{
-                      "type":"object",
-                      "required":false,
+                      "type": "object",
+                      "required": false,
                       "title": "Previous button Settings",
                       "properties":{
                         "_isEnabled": {
-                          "type":"boolean",
-                          "required":false,
+                          "type": "boolean",
+                          "required": false,
+                          "default": true,
                           "title": "Enabled",
-                          "inputType": { "type": "Boolean", "options": [false, true]},
-                          "validators": []
+                          "inputType": {"type": "Boolean", "options": [false, true]},
+                          "validators": [],
+                          "help": "Set to 'true' if button will be enabled on the page"
                         },
                         "_style": {
-                          "type":"string",
-                          "required":false,
+                          "type": "string",
+                          "required": false,
                           "enum": ["hidden", "disabled"],
-                          "default": "hidden",
+                          "default": "disabled",
                           "title": "Make button visible or disable",
                           "inputType": {"type": "Select", "options":["hidden", "disabled"]},
                           "validators": ["required"],
                           "help": "Set button visibility or disabling before completion"
                         },
                         "text": {
-                          "type":"string",
+                          "type": "string",
                           "required": false,
-                          "default": "Continue",
+                          "default": "Prev step",
                           "title": "Button Text",
                           "inputType": "Text",
                           "validators": []
@@ -201,24 +202,32 @@
                       }
                     },
                     "next":{
-                      "type":"object",
-                      "required":false,
+                      "type": "object",
+                      "required": false,
                       "title": "Next button Settings",
                       "properties":{
                         "_styleBeforeCompletion": {
-                          "type":"string",
-                          "required":false,
+                          "type": "string",
+                          "required": false,
                           "enum": ["hidden", "disabled"],
-                          "default": "hidden",
+                          "default": "disabled",
                           "title": "Make button visible or disable",
                           "inputType": {"type": "Select", "options":["hidden", "disabled"]},
                           "validators": ["required"],
                           "help": "Set button visibility or disabling before completion"
                         },
-                        "finalText": {
-                          "type":"string",
+                        "text": {
+                          "type": "string",
                           "required": false,
-                          "default": "Finish",
+                          "default": "Next step",
+                          "title": "Button Text",
+                          "inputType": "Text",
+                          "validators": []
+                        },
+                        "finalText": {
+                          "type": "string",
+                          "required": false,
+                          "default": "Complete Activity",
                           "title": "Final Button Text",
                           "inputType": "Text",
                           "validators": [],
@@ -230,34 +239,19 @@
                       "type":"string",
                       "required": false,
                       "default": "navigate-buttons",
-                      "title": "Proof of Concept Plugin",
+                      "title": "Component name",
                       "inputType": "Text",
                       "validators": []
                     }
                   }
                 },
-                "_stepLocking": {
-                  "type":"object",
-                  "required":false,
-                  "title": "Step Locking Attributes",
-                  "properties":{
-                    "_isEnabled": {
-                      "type":"boolean",
-                      "required":false,
-                      "default":true,
-                      "title":"Enabled",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
-                      "validators": []
-                    },
-                    "_isCompletionRequired": {
-                      "type":"boolean",
-                      "required":false,
-                      "default":true,
-                      "title": "Completion Required",
-                      "inputType": { "type": "Boolean", "options": [false, true]},
-                      "validators": []
-                    }
-                  }
+                "_isCompletionRequired": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": true,
+                  "title": "Completion Required",
+                  "inputType": {"type": "Boolean", "options": [false, true]},
+                  "validators": []
                 }
               }
             }

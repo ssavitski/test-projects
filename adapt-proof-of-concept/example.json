@@ -15,8 +15,5 @@
     },
     "_component": "navigate-buttons"
   },
-  "_stepLocking": {
-    "_isEnabled": true,
-    "_isCompletionRequired": true
-  }
+  "_isCompletionRequired": true
 }

@@ -40,7 +40,7 @@ define([
       var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
       var interactionComplete = this.model.get(completionAttribute);
 
-      if (proofOfConcept._stepLocking._isCompletionRequired === false) {
+      if (proofOfConcept._isCompletionRequired === false) {
         this.allowEnabled = true;
         proofOfConcept._buttons.next._isDisabled = false;
       } else if (proofOfConcept._buttons.next._styleBeforeCompletion === "disabled") {
@@ -90,10 +90,10 @@ define([
       var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
 
       if (!bool) {
-        this.$(".button-next").addClass("display-none");
+        this.$(".button-next, .button-complete").addClass("display-none");
         proofOfConcept._buttons.next._isVisible = false;
       } else {
-        this.$(".button-next").removeClass("display-none");
+        this.$(".button-next, .button-complete").removeClass("display-none");
         proofOfConcept._buttons.next._isVisible = true;
       }
     },
@@ -181,7 +181,7 @@ define([
     },
 
     onPrevButtonClick: function () {
-      this.isStepLockFinished = true;
+      this.isStepLockFinished = false;
       Adapt.trigger("proof-of-concept:goPrev");
     },
 

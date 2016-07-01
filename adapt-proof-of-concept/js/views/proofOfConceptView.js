@@ -57,13 +57,6 @@ define([
         return;
       }
 
-      var proofOfConcept = Adapt.proofOfConcept.getModelConfig(this.model);
-      var isSteplocking = (proofOfConcept._stepLocking && proofOfConcept._stepLocking._isEnabled);
-      if (!isSteplocking) {
-        this.continueToNext();
-        return;
-      }
-
       Adapt.trigger("proof-of-concept:steplock", this);
 
       this.isSteplocked = true;
@@ -85,4 +78,4 @@ define([
 
   return ProofOfConceptView;
 
-})
+});

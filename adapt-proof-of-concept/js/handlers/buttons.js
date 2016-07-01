@@ -6,7 +6,8 @@ define([
   var ProofOfConceptButtonHandler = _.extend({
 
     buttonViews: null,
-    counter: 0,
+    articleCounter: 0,
+    blockCounter: 0,
 
     initialize: function () {
       this.listenToOnce(Adapt, {
@@ -32,7 +33,14 @@ define([
       //setup button on prerender to allow it to control the steplocking process
       if (!this.isProofOfConceptEnabled(view.model)) return;
 
-      this.setupConfigDefaults(view.model, this.counter++);
+      var counter;
+      if (view.model.get("_type") === "article") {
+        counter = this.articleCounter++;
+      } else {
+        counter = this.blockCounter++;
+      }
+
+      this.setupConfigDefaults(view.model, counter);
 
       this.buttonViews[view.model.get("_id")] = new ButtonsView({
         model: view.model

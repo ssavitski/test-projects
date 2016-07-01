@@ -12,6 +12,7 @@ define([
 
     initialize: function (options) {
       this.setupDescendants();
+      this.setLastArticle();
       this.addClassToHtml();
       this.setupEventListeners();
     },
@@ -22,6 +23,16 @@ define([
       this.getDescendants();
     },
 
+    setLastArticle: function() {
+      var lastArticleDescendant;
+
+      this.descendantsParentFirst.each(_.bind(function (descendant) {
+        if (descendant.get("_type") === "article") lastArticleDescendant = descendant;
+      }, this));
+
+      lastArticleDescendant.set("_proofOfConcept", _.extend({"_isFinal": true}, lastArticleDescendant.get("_proofOfConcept")));
+    },
+
     getDescendants: function () {
       this.descendantsChildFirst = this.model.getDescendants();
       this.descendantsParentFirst = this.model.getDescendants(true);
@@ -30,7 +41,6 @@ define([
 
       this.descendantsChildFirst = this.filterComponents(this.descendantsChildFirst);
       this.descendantsParentFirst = this.filterComponents(this.descendantsParentFirst);
-
     },
 
     filterComponents: function (descendants) {
@@ -52,16 +62,11 @@ define([
         //check if descendant has proofOfConcept settings
         if (noProofOfConceptConfig) return;
 
-        //setup steplocking defaults
-        proofOfConcept._stepLocking = _.extend({
-          "_isEnabled": true,
-          "_isCompletionRequired": true
-        }, proofOfConcept._stepLocking);
-
         //setup main proofOfConcept defaults
         proofOfConcept = _.extend({
           "_isEnabled": true,
-          "_onChildren": true
+          "_onChildren": true,
+          "_isCompletionRequired": true
         }, proofOfConcept);
 
         Adapt.proofOfConcept.setModelConfig(descendant, proofOfConcept);
@@ -77,6 +82,7 @@ define([
 
     setupArticleOnChildren: function (articleModel, articleProofOfConceptConfig) {
       //set proofOfConcept on all blocks, using article config with block overrides
+      if (!articleProofOfConceptConfig._isEnabled) return false;
       var articleBlocks = articleModel.getChildren();
 
       articleBlocks.each(function (blockModel, index) {
@@ -87,8 +93,11 @@ define([
             blockProofOfConceptConfig[k] = _.extend({}, articleProofOfConceptConfig[k], blockProofOfConceptConfig[k]);
           }
         }
-
-        blockProofOfConceptConfig = _.extend({}, articleProofOfConceptConfig, blockProofOfConceptConfig);
+        if (blockProofOfConceptConfig._isEnabled == false) {
+          blockProofOfConceptConfig = _.extend({}, articleProofOfConceptConfig);
+        } else {
+          blockProofOfConceptConfig = _.extend({}, articleProofOfConceptConfig, blockProofOfConceptConfig);
+        }
 
         if (articleBlocks.length === index + 1) {
           blockProofOfConceptConfig._isFinal = true;
@@ -144,8 +153,16 @@ define([
         this.currentDescendant = null;
       }
 
+      var descendant = this.descendantsChildFirst.models[this.currentDescendantIndex];
+
+      while(!descendant.get('_isLocked')) {
+        this.currentDescendantIndex--;
+        descendant = this.descendantsChildFirst.models[this.currentDescendantIndex]
+      };
+
       for (var index = this.currentDescendantIndex || 0, l = (this.descendantsChildFirst.models.length - 1); index < l; index++) {
-        var descendant = this.descendantsChildFirst.models[index];
+        descendant = this.descendantsChildFirst.models[index];
+        descendant.set('_isLocked', false);
         switch (descendant.get("_type")) {
           case "block":
           case "article":
@@ -184,6 +201,7 @@ define([
     },
 
     goNext: function () {
+      this.currentDescendant.model.set('_isLocked', true);
       this.currentDescendant.trigger("steplock");
       this.currentLocksOnDescendant--;
       if (this.currentLocksOnDescendant > 0) return;
@@ -192,7 +210,7 @@ define([
       this.gotoNextDescendant();
     },
 
-    onContinue: function () {
+    onContinue: function (view) {
       if (!this.currentDescendant) return;
       if (view.model.get("_id") !== this.currentDescendant.model.get("_id")) return;
       
@@ -239,4 +257,4 @@ define([
 
   return PageView;
 
-})
+});

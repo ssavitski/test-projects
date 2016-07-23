@@ -30,7 +30,7 @@
             float: none;
             overflow: hidden;
             width: 98%;
-            height: 98%;
+            height: 100%;
             margin: 1%;
             cursor: pointer;
             border: 1px solid @secondary-color;
@@ -65,22 +65,54 @@
                     width: 100%;
                     height: auto;
                 }
+
+                &.flipcard-item-text-container {
+                    z-index: 150;
+                }
             }
 
             &.flipcard-item-back {
-                padding: @item-padding;
-
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -ms-box-sizing: border-box;
-                -o-box-sizing: border-box;
-                box-sizing: border-box;
-
                 -webkit-transform: @flipcard-item-rotate-Y-minus180deg;
                 -moz-transform: @flipcard-item-rotate-Y-minus180deg;
                 -ms-transform: @flipcard-item-rotate-Y-minus180deg;
                 -o-transform: @flipcard-item-rotate-Y-minus180deg;
                 transform: @flipcard-item-rotate-Y-minus180deg;
+
+                .flipcard-item-backImage {
+                    width: 100%;
+                    height: auto;
+                }
+
+                &.flipcard-item-text-container {
+                    z-index: 110;
+                }
+            }
+        }
+
+        .flipcard-item-text-container {
+            padding: @item-padding;
+            overflow-x: hidden;
+            overflow-y: auto;
+            z-index: 100;
+
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .flipcard-item-image-container {
+            overflow: hidden;
+            z-index: 120;
+
+            &.flipcard-item-back {
+                overflow: hidden;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
             }
         }
 
@@ -91,17 +123,22 @@
                 -ms-transform: @flipcard-item-rotate-Y-plus180deg;
                 -o-transform: @flipcard-item-rotate-Y-plus180deg;
                 transform: @flipcard-item-rotate-Y-plus180deg;
+
+                &.flipcard-item-text-container {
+                    z-index: 110;
+                }
             }
 
             .flipcard-item-back {
-                overflow-x: hidden;
-                overflow-y: auto;
-
                 -webkit-transform: @flipcard-item-rotate-Y-0deg;
                 -moz-transform: @flipcard-item-rotate-Y-0deg;
                 -ms-transform: @flipcard-item-rotate-Y-0deg;
                 -o-transform: @flipcard-item-rotate-Y-0deg;
                 transform: @flipcard-item-rotate-Y-0deg;
+
+                &.flipcard-item-text-container {
+                    z-index: 150;
+                }
             }
         }
     }

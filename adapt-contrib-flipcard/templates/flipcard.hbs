@@ -4,20 +4,41 @@
     <div class="flipcard-widget component-widget clearfix">
         {{#each _items}}
         <div class="flipcard-item component-item item-{{@index}}">
-            <div class="flipcard-item-face flipcard-item-front">
-                <img src="{{frontImage.src}}" class="flipcard-item-frontImage" aria-label="{{frontImage.alt}}" tabindex="0">
+            <div class="flipcard-item-face flipcard-item-front {{#if (eq frontSide.displayType 'text')}}flipcard-item-text-container{{/if}} {{#if (eq frontSide.displayType 'image')}}flipcard-item-image-container{{/if}}">
+                {{#if (eq frontSide.displayType 'image')}}
+                    {{#if frontSide.image.src}}
+                    <img src="{{frontSide.image.src}}" class="flipcard-item-frontImage" aria-label="{{frontSide.image.alt}}" tabindex="0">
+                    {{/if}}
+                {{else}}
+                    {{#if frontSide.text.title}}
+                    <div class="flipcard-item-front-title">
+                    {{{frontSide.text.title}}}
+                    </div>
+                    {{/if}}
+                    {{#if frontSide.text.body}}
+                    <div class="flipcard-item-front-body">
+                    {{{frontSide.text.body}}}
+                    </div>
+                    {{/if}}
+                {{/if}}
             </div>
 
-            <div class="flipcard-item-face flipcard-item-back">
-                {{#if backTitle}}
-                <div class="flipcard-item-back-title">
-                {{{backTitle}}}
-                </div>
-                {{/if}}
-                {{#if backBody}}
-                <div class="flipcard-item-back-body">
-                {{{backBody}}}
-                </div>
+            <div class="flipcard-item-face flipcard-item-back {{#if (eq backSide.displayType 'text')}}flipcard-item-text-container{{/if}} {{#if (eq backSide.displayType 'image')}}flipcard-item-image-container{{/if}}">
+                {{#if (eq backSide.displayType 'image')}}
+                    {{#if backSide.image.src}}
+                    <img src="{{backSide.image.src}}" class="flipcard-item-backImage" aria-label="{{backSide.image.alt}}" tabindex="0">
+                    {{/if}}
+                {{else}}
+                    {{#if backSide.text.title}}
+                    <div class="flipcard-item-back-title">
+                    {{{backSide.text.title}}}
+                    </div>
+                    {{/if}}
+                    {{#if backSide.text.body}}
+                    <div class="flipcard-item-back-body">
+                    {{{backSide.text.body}}}
+                    </div>
+                    {{/if}}
                 {{/if}}
             </div>
         </div>

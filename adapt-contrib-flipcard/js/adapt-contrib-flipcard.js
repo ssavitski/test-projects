@@ -5,7 +5,8 @@
  */
 define([
     'coreViews/componentView',
-    'coreJS/adapt'
+    'coreJS/adapt',
+    './helpers/adapt-contrib-flipcard-helper',
 ], function(ComponentView, Adapt) {
 
     var Flipcard = ComponentView.extend({
@@ -47,10 +48,13 @@ define([
 
         // This function called on triggering of device resize and device change event of Adapt.
         reRender: function() {
-            var imageHeight = this.$('.flipcard-item-frontImage').eq(0).height();
-            if (imageHeight) {
-                this.$('.flipcard-item').height(imageHeight);
-            }
+            var imageHeightArr = [
+                this.$('.flipcard-item-frontImage').eq(0).height(),
+                this.$('.flipcard-item-backImage').eq(0).height()
+            ];
+            
+            var imageHeight = Math.max(imageHeightArr[0], imageHeightArr[1]) || 0;
+            if (imageHeight) this.$('.flipcard-item').height(imageHeight);
         },
 
         // Click or Touch event handler for flip card.

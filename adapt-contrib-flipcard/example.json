@@ -13,24 +13,43 @@
     "_flipTime": 400,
     "_items": [
         {
-            "frontImage": {
-                "src": "course/en/images/flip_1.png",
-                "alt": "flipcard item 1 graphic alt text here."
+            "frontSide": {
+                "displayType": "image",
+                "image": {
+                    "src": "course/en/images/flip_1.png",
+                    "alt": "flipcard item 1 graphic alt text here."
+                },
+                "text": {}
             },
-            "backTitle": "Heading 1",
-            "backBody": "This is display text 1."
+            "backSide": {
+                "displayType": "text",
+                "image": {},
+                "text": {
+                    "title": "Heading 1",
+                    "body": "This is display text 1."
+                }  
+            }
         },
         {
-            "frontImage": {
-                "src": "course/en/images/flip_2.png",
-                "alt": "flipcard item 1 graphic alt text here."
+            "frontSide": {
+                "displayType": "text",
+                "image": {},
+                "text": {
+                    "title": "Heading 2",
+                    "body": "<ul><li>This is list item 1.</li><li>This is list item 2.</li></ul>"
+                }  
             },
-            "backTitle": "Heading 2",
-            "backBody": "<ul><li>This is list item 1.</li><li>This is list item 2.</li></ul>"
+            "backSide": {
+                "displayType": "image",
+                "image": {
+                    "src": "course/en/images/flip_2.png",
+                    "alt": "flipcard item 2 graphic alt text here."
+                },
+                "text": {}
+            }
         }
     ]
 },
-
 {
     "_id": "c-135",
     "_parentId": "b-70",
@@ -46,20 +65,41 @@
     "_flipTime": 400,
     "_items": [
         {
-            "frontImage": {
-                "src": "course/en/images/flip_1.png",
-                "alt": "flipcard item 1 graphic alt text here."
-            },
-            "backTitle": "Heading 1",
-            "backBody": "This is display text 1."
+            "frontSide": {
+                "displayType": "image",
+                "image": {
+                    "src": "course/en/images/flip_1.png",
+                    "alt": "flipcard item 1 graphic alt text here."
+                },
+                    "text": {}
+                },
+                    "backSide": {
+                    "displayType": "text",
+                    "image": {},
+                    "text": {
+                    "title": "Heading 1",
+                    "body": "This is display text 1."
+                }
+            }
         },
         {
-            "frontImage": {
-                "src": "course/en/images/flip_2.png",
-                "alt": "flipcard item 1 graphic alt text here."
+            "frontSide": {
+                "displayType": "text",
+                "image": {},
+                "text": {
+                    "title": "Heading 2",
+                    "body": "<ul><li>This is list item 1.</li><li>This is list item 2.</li></ul>"
+                }
             },
-            "backTitle": "Heading 2",
-            "backBody": "<ul><li>This is list item 1.</li><li>This is list item 2.</li></ul>"
+            "backSide": {
+                "displayType": "image",
+                "image": {
+                    "src": "course/en/images/flip_2.png",
+                    "alt": "flipcard item 2 graphic alt text here."
+                    },
+                    "text": {}
+                }
+            }
         }
     ]
 }

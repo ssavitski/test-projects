@@ -2,44 +2,44 @@
 
 .notify .notify-popup {
 
-	&.correct {
-		background-color: @green;
-	}
+  &.correct {
+    background-color: @green;
+  }
 
-  	&.partially-correct {
-	  	background-color: @yellow;
-	}
+  &.partially-correct {
+    background-color: @yellow;
+  }
 
-	&.incorrect {
-		background-color: @red;
-	}
+  &.incorrect {
+    background-color: @red;
+  }
 
 }
 
 .answer-status-icon {
-	width: 40px;
-	margin-right: 10px;
-	border-radius: 20px;
-	float: left;
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 20px;
+  float: left;
 
-	@media (max-width: 520px) {
-		width: 30px;
-		margin-right: 5px;
-	}
-	
-	&.answer-incorrect {
-		background-color: darken(@red, 20);
-	}
+  @media (max-width: 520px) {
+    width: 30px;
+    margin-right: 5px;
+  }
 
-	&.answer-correct {
-		background-color: darken(@green, 20);
-	}
+  &.answer-incorrect {
+    background-color: darken(@red, 20);
+  }
 
-    &.answer-partially-correct {
-        background-color: darken(@yellow, 20);
-    }
+  &.answer-correct {
+    background-color: darken(@green, 20);
+  }
 
-	img {
-		display: block;
-	}
+  &.answer-partially-correct {
+    background-color: darken(@yellow, 20);
+  }
+
+  img {
+    display: block;
+  }
 }

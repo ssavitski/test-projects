@@ -1,8 +1,13 @@
+@yellow: #e3e31d;
+
 .notify .notify-popup {
 
-	&.correct,
-	&.partially-correct {
+	&.correct {
 		background-color: @green;
+	}
+
+  	&.partially-correct {
+	  	background-color: @yellow;
 	}
 
 	&.incorrect {
@@ -29,6 +34,10 @@
 	&.answer-correct {
 		background-color: darken(@green, 20);
 	}
+
+    &.answer-partially-correct {
+        background-color: darken(@yellow, 20);
+    }
 
 	img {
 		display: block;

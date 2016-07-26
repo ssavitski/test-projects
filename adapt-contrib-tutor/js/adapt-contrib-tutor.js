@@ -5,6 +5,8 @@ define([
 
     Adapt.on('questionView:showFeedback', function(view) {
 
+        var tutorSettings = Adapt.config.get('_tutor');
+
         var alertObject = {
             title: view.model.get("feedbackTitle"),
             body: view.model.get("feedbackMessage")
@@ -17,7 +19,7 @@ define([
             if (view.model.get('_isCorrect')) {
                 alertObject._classes = 'correct';
                 answerIndicator = template({ 
-                	answerStatus: 'Correct!',
+                	answerStatus: tutorSettings._correctMsg,
                 	className: alertObject._classes
                 });
             } else {
@@ -28,17 +30,17 @@ define([
                         : 'incorrect';
                     answerIndicator = view.model.get('_isAtLeastOneCorrectSelection')
                         ? template({ 
-                        	answerStatus: 'Partially correct!',
+                        	answerStatus: tutorSettings._partiallyCorrectMsg,
                         	className: alertObject._classes
                         })
                         : template({ 
-                        	answerStatus: 'Incorrect',
+                        	answerStatus: tutorSettings._incorrectMsg,
                         	className: alertObject._classes
                         });
                 } else {
                 	alertObject._classes = 'incorrect';
                     answerIndicator = template({ 
-                    	answerStatus: 'Incorrect',
+                    	answerStatus: tutorSettings._incorrectMsg,
                     	className: alertObject._classes
                     });
                 }

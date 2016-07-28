@@ -41,19 +41,84 @@ define(function(require) {
       return StatementModel.prototype.getObject.call(this);
     },
 
+    getResult: function() {
+      return StatementModel.prototype.getResult.call(this);
+    },
+
     getActivityDefinitionObject: function() {
       var object = StatementModel.prototype.getActivityDefinitionObject.call(this);
+      var aLetterCode = 97;
+      var correctResponses = [];
+      var componentId = this.get('model').get('_id');
+      var componentItems = this.get('model').get('_items');
 
       if (_.isEmpty(object)) {
         object = {};
       }
 
       object.name = {};
+      object.description = {};
+      object.choices = [];
+
       object.name[Adapt.config.get('_defaultLanguage')] = this.get('model').get('title');
+      object.description[Adapt.config.get('_defaultLanguage')] = this.get('model').get('body');
+
+      switch(this.get('model').get('_component')) {
+        case 'mcq':
+          object.interactionType = 'choice';
+          _.each(componentItems, function(item, index) {
+            var choice = {};
+            choice.description = {};
+            choice.description[Adapt.config.get('_defaultLanguage')] = item.text;
+            choice.id = componentId + '_' + String.fromCharCode(aLetterCode + index);
+            object.choices.push(choice);
+            if (item._shouldBeSelected) {
+              correctResponses.push(choice.id);
+            }
+          });
+          object.correctResponsesPattern = correctResponses.join('[,]');
+
+          break;
+      }
 
       object.type = ['http://adaptlearning.org', this.get('model').get('_type'), this.get('model').get('_component')].join('/');
 
       return object;
+    },
+
+    getResultOptions: function() {
+      var result = {};
+      var aLetterCode = 97;
+      var correctResponses = [];
+      var responses = [];
+      var choicesIds = [];
+      var items = this.get('model').get('_items');
+      var selectedItems = this.get('model').get('_selectedItems');
+      var componentId = this.get('model').get('_id');
+
+      result.success = true;
+
+      switch(this.get('model').get('_component')) {
+        case 'mcq':
+          _.each(items, function(item, index) {
+            var choiceId = componentId + '_' + String.fromCharCode(aLetterCode + index);
+            choicesIds[item._index] = choiceId;
+            if (item._shouldBeSelected) {
+              correctResponses.push(choiceId);
+            }
+          });
+          _.each(selectedItems, function(item, index, choices) {
+
+            responses.push(choicesIds[item._index]);
+            if ((item._isSelected !== item._shouldBeSelected) || (correctResponses.length !== choices.length)) {
+              result.success = false;
+            }
+          });
+          result.response = responses.join(',');
+          break;
+      }
+
+      return result;
     },
 
     getIri: function() {

@@ -123,6 +123,7 @@ define(function(require) {
     },
 
     setupListeners: function() {
+      this.listenTo(Adapt.components, "change:_attemptsLeft", this.onComponentAttempt);
       this.listenTo(Adapt.components, "change:_isComplete", this.onComponentComplete);
       this.listenTo(Adapt.blocks, "change:_isComplete", this.onBlockComplete);
       this.listenTo(Adapt.course, "change:_isComplete", this.onCourseComplete);
@@ -131,13 +132,41 @@ define(function(require) {
       this.listenTo(Adapt, "xapi:stateChanged", this.onStateChanged);
     },
 
+    onComponentAttempt: function(component) {
+
+      if ((component.get('_attempts') === component.get('_attemptsLeft')) ||
+          (component.get('_recordInteraction') !== false)) {
+        return;
+      }
+
+      var statementModel = new ComponentStatementModel({
+        activityId: this.get('activityId'),
+        actor: this.get('actor'),
+        registration: this.get('registration'),
+        model: component
+      });
+
+      if (!statementModel) {
+        return;
+      }
+
+      var statement = statementModel.getStatementObject();
+
+      this.sendStatement(
+        statement
+      );
+      component.set('_statementSend', true);
+
+    },
+
     onComponentComplete: function(component) {
       this.onTrackData({
         component: component,
         xAPI: this
       });
 
-      if (component.get('_recordInteraction') !== false) {
+      if ((component.get('_recordInteraction') !== false) ||
+          (component.get('_statementSend'))) {
         return;
       }
 

@@ -37,6 +37,7 @@ define(function(require) {
       var verb = this.getVerb();
       var object = this.getObject();
       var context = this.getContext();
+      var result = this.getResult();
 
       if (!verb) {
         return null;
@@ -56,6 +57,10 @@ define(function(require) {
 
       statement.object = object;
 
+      if (result) {
+        statement.result = result;
+      }
+
       if (context) {
         statement.context = context;
       }
@@ -64,6 +69,11 @@ define(function(require) {
     },
 
     getVerb: function() {
+      var component = this.get('model').get('_component');
+
+      switch(component) {
+        case 'mcq': return ADL.verbs.answered;
+      }
       return ADL.verbs.experienced;
     },
 
@@ -82,6 +92,10 @@ define(function(require) {
       object.definition = this.getActivityDefinitionObject(this.get('model'));
 
       return object;
+    },
+
+    getResult: function() {
+      return this.getResultOptions(this.get('model'));
     },
 
     getActivityDefinitionObject: function() {

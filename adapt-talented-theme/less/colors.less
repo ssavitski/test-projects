@@ -4,22 +4,24 @@
 @white: #ffffff;
 @black: #090B0C;
 @blue: #00AEEF;
-@light-grey: #C6CCD3;
+@light-grey: #eff0f2;
 @mid-grey: #525D65;
 @dark-grey: #333437;
 @red: #D52B27;
 @green: #60BB46;
-
+@dark-red: #8b2331;
+@t-secondary-dark-red: #7b2f3e;
+@t-tertiary-dark-red: #7a2426;
 
 // Main Colors
 // ===========
 
 // Components
-@primary-color: @blue;
+@primary-color: @dark-red;
 @primary-color-inverted: @white;
 // Buttons
 @secondary-color: @black;
-@secondary-color-inverted: @white;
+@secondary-color-inverted: @dark-red;
 // Navigation Bar
 @tertiary-color: @white;
 @tertiary-color-inverted: @black;
@@ -30,12 +32,12 @@
 @foreground-color: @black;
 @background-color: @white;
 @foreground-color-inverted: @white;
-@background-color-inverted: @mid-grey;
+@background-color-inverted: @dark-red;
 // Validation States
 @validation-error: @red;
 @validation-success: @green;
 // Disabled States
-@disabled-color: #727272;
+@disabled-color: #8e908f;
 @disabled-color-inverted: #ccc;
 
 @transparency: rgba(255,255,255,0.8);
@@ -51,15 +53,15 @@
 @title-color-inverted: @primary-color-inverted;
 
 // Buttons
-@button-color: @secondary-color;
-@button-color-hover: darken(@button-color, 40%);
+@button-color: transparent;
+@button-color-hover: @dark-red;
 @button-color-disabled: @disabled-color;
 
 @button-text-color: @secondary-color-inverted;
-@button-text-color-hover: @secondary-color-inverted;
+@button-text-color-hover: @white;
 @button-text-color-disabled: @disabled-color-inverted;
 
-@button-border-color: @button-color;
+@button-border-color: @dark-red;
 @button-border-color-hover: @button-color-hover;
 @button-border-color-disabled: @button-color-disabled;
 
@@ -100,12 +102,12 @@
 @drawer-progress-border-color: darken(@drawer-item-color, 20%);
 
 // Components
-@component-background-color: darken(@background-color, 10%);
+@component-background-color: @light-grey;
 
 @item-color: @primary-color;
-@item-color-hover: darken(@item-color, 20%);
+@item-color-hover: @t-secondary-dark-red;
 @item-color-disabled: @disabled-color;
-@item-color-visited: desaturate(@item-color, 90%);
+@item-color-visited: @disabled-color;
 @item-color-selected: @item-color-hover;
 
 @item-text-color: @primary-color-inverted;
@@ -125,8 +127,8 @@
 @item-border-color-inverted: @item-text-color;
 
 // Menu
-@menu-item-color: @primary-color;
-@menu-item-text-color: @primary-color-inverted;
+@menu-item-color: @light-grey;
+@menu-item-text-color: @black;
 @menu-item-progress-color: darken(@menu-item-color, 20%);
 @menu-item-progress-fill-color: @menu-item-text-color;
 @menu-item-progress-border-color: transparent;

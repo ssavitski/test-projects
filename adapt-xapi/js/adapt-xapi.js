@@ -134,8 +134,7 @@ define(function(require) {
 
     onComponentAttempt: function(component) {
 
-      if ((component.get('_attempts') === component.get('_attemptsLeft')) ||
-          (component.get('_recordInteraction') !== false)) {
+      if ((component.get('_attempts') === component.get('_attemptsLeft')) {
         return;
       }
 
@@ -165,8 +164,7 @@ define(function(require) {
         xAPI: this
       });
 
-      if ((component.get('_recordInteraction') !== false) ||
-          (component.get('_statementSend'))) {
+      if (component.get('_statementSend')) {
         return;
       }
 

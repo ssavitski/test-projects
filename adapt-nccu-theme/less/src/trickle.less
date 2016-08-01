@@ -2,6 +2,19 @@
     .trickle-button-inner { //overwrite component styling 
         background-color: none;
         padding: 0;
+
+        button {
+          background-color: @dark-red;
+          color: @white;
+
+          &:hover {
+            background-color: @t-secondary-dark-red;
+          }
+
+          &:active {
+            background-color: @t-tertiary-dark-red;
+          }
+        }
     }
 
     &.trickle-round-arrow {

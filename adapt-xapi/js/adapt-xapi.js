@@ -134,7 +134,7 @@ define(function(require) {
 
     onComponentAttempt: function(component) {
 
-      if ((component.get('_attempts') === component.get('_attemptsLeft')) {
+      if (component.get('_attempts') === component.get('_attemptsLeft')) {
         return;
       }
 

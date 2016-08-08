@@ -133,9 +133,7 @@ define(function(require) {
                     this.$('.notify-shadow').css("display", "block");
                 } else {
 
-                    this.$('.notify-shadow').velocity({ opacity: 0 }, {duration:0}).velocity({ opacity: 1 }, {duration:400, begin: _.bind(function() {
-                        this.$('.notify-shadow').css("display", "block");
-                    }, this)});
+                    this.$('.notify-shadow').fadeIn(300);
 
                 }
 
@@ -148,10 +146,10 @@ define(function(require) {
                     
                 } else {
 
-                    this.$('.notify-popup').velocity({ opacity: 0 }, {duration:0}).velocity({ opacity: 1 }, { duration:400, begin: _.bind(function() {
+                    this.$('.notify-popup').fadeIn(400, _.bind(function() {
                         this.$('.notify-popup').css("visibility", "visible");
                         complete.call(this);
-                    }, this) });
+                    }, this));
 
                 }
                 
@@ -178,14 +176,14 @@ define(function(require) {
 
             } else {
 
-                this.$('.notify-popup').velocity({ opacity: 0 }, {duration:400, complete: _.bind(function() {
+                this.$('.notify-popup').fadeOut(400, _.bind(function() {
                     this.$('.notify-popup').css("visibility", "hidden");
-                }, this)});
+                }, this));
 
-                this.$('.notify-shadow').velocity({ opacity: 0 }, {duration:400, complete:_.bind(function() {
+                this.$('.notify-shadow').fadeOut(300, _.bind(function() {
                     this.$el.css("visibility", "hidden");
                     this.remove();
-                }, this)});
+                }, this));
             }
 
             $('body').scrollEnable();

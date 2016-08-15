@@ -54,7 +54,12 @@ define(function(require) {
       }
       // We need to listen for stateLoad before we load state.
       this.listenTo(Adapt, "xapi:stateLoaded", this.restoreState);
+
+      /*  Committed because of unsupported GET requests on the server
+          what have influence on other requests particularly sending statements
       this.loadState();
+      */
+
       this.set('initialised', true);
 
       $(window).unload(_.bind(this.xapiEnd, this));
@@ -267,7 +272,10 @@ define(function(require) {
     },
 
     onStateChanged: function(event) {
+      /*  Committed because of unsupported GET requests on the server
+          what have influence on other requests particularly sending statements
       this.saveState();
+      */
     },
 
     /**

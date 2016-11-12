@@ -1,0 +1,17 @@
+{{! Maintainers - Learning Pool}}
+<div class="component-inner openTextInput-inner">
+  {{> component this}}
+  <div class="component-widget openTextInput-widget">
+    <div class="openTextInput-answer-container">
+      <div class="openTextInput-autosave"></div>
+      <textarea class="openTextInput-item-textbox"
+                rows={{_numberOfRows}} placeholder="{{placeholder}}"
+                maxlength="{{_allowedCharacters}}">{{_userAnswer}}</textarea>
+    </div>
+    <div class="openTextInput-count-characters">
+      <span class="openTextInput-count-amount"></span>&nbsp;{{remainingCharactersText}}
+    </div>
+    <div class="buttons">
+    </div>
+  </div>
+</div>

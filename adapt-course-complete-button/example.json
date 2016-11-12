@@ -1,0 +1,8 @@
+// To go in the course.json file
+"_settings": {
+  "_isEnabled": true,
+  "_completeButton":{
+    "ariaLabel": "Complete Activity and navigate back by clicking here.",
+    "buttonText": "Complete Activity"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "$ref": "http://localhost/plugins/content/component/model.schema",
+  "globals": {
+    "ariaRegion": {
+      "type": "string",
+      "required": true,
+      "default": "This component is a flipcard comprised of flippable cards containing display image. Select the front face image to flip to the back face of these card to display associated text.",
+      "inputType": "Text",
+      "validators": []
+    }
+  },
+  "properties":{
+    "_supportedLayout": {
+      "type": "string",
+      "required": true,
+      "enum": ["full-width", "half-width", "both"],
+      "default": "both",
+      "editorOnly": true
+    },
+    "instruction": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "Text",
+      "validators": [],
+      "help": "This is the instruction text"
+    },
+    "_flipType": {
+      "type": "string",
+      "required": true,
+      "enum": ["allFlip", "singleFlip"],
+      "inputType": {"type": "Select", "options": ["allFlip", "singleFlip"]},
+      "title": "Set flip type",
+      "default": "allFlip",
+      "validators": ["required"],
+      "help": "'singleFlip' or 'allFlip'"
+    },
+    "_flipTime": {
+      "type": "number",
+      "required": true,
+      "inputType": "Number",
+      "title": "Flip animation time",
+      "default": 400,
+      "validators": ["required", "number"],
+      "help": "How much time should the flip animation takes"
+    },
+    "_items": {
+      "type": "array",
+      "required": true,
+      "title": "Items",
+      "items": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "frontSide": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "displayType": {
+                "type": "string",
+                "required": true,
+                "default": "image",
+                "title": "Front side type:",
+                "enum": ["image", "text"],
+                "inputType": {"type": "Select", "options": ["image", "text"]},
+                "validators": ["required"],
+                "help": "What will be displayed on the front side"
+              },
+              "image": {
+                "type": "object",
+                "required": false,
+                "title": "Graphic block",
+                "properties":{
+                  "alt": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "inputType": "Text",
+                    "validators": [],
+                    "help": "The alternative text for front side image"
+                  },
+                  "src": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "inputType": "Asset:image",
+                    "validators": [],
+                    "help": "Front side image source"
+                  }
+                }
+              },
+              "text": {
+                "type": "object",
+                "required": false,
+                "title": "Text block",
+                "properties":{
+                  "title": {
+                    "type": "string",
+                    "required": false,
+                    "inputType": "Text",
+                    "title": "Title for front side",
+                    "default": "",
+                    "validators": [],
+                    "help": "Enter a title text for front side of flipcard element"
+                  },
+                  "body": {
+                    "type": "string",
+                    "required": false,
+                    "inputType": "TextArea",
+                    "title": "Text for front side",
+                    "default": "",
+                    "validators": [],
+                    "help": "Enter body text for front side of flipcard element"
+                  }
+                }
+              }
+            }  
+          },
+          "backSide": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "displayType": {
+                "type": "string",
+                "required": true,
+                "default": "text",
+                "title": "Back side type:",
+                "enum": ["image", "text"],
+                "inputType": {"type": "Select", "options": ["image", "text"]},
+                "validators": ["required"],
+                "help": "What will be displayed on the back side"
+              },
+              "image": {
+                "type": "object",
+                "required": false,
+                "title": "Graphic block",
+                "properties":{
+                  "alt": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "inputType": "Text",
+                    "validators": [],
+                    "help": "The alternative text for back side image"
+                  },
+                  "src": {
+                    "type": "string",
+                    "required": false,
+                    "default": "",
+                    "inputType": "Asset:image",
+                    "validators": [],
+                    "help": "Back side image source"
+                  }
+                }
+              },
+              "text": {
+                "type": "object",
+                "required": false,
+                "title": "Text block",
+                "properties":{
+                  "title": {
+                    "type": "string",
+                    "required": false,
+                    "inputType": "Text",
+                    "title": "Title for back side",
+                    "default": "",
+                    "validators": [],
+                    "help": "Enter a title text for back side of flipcard element"
+                  },
+                  "body": {
+                    "type": "string",
+                    "required": false,
+                    "inputType": "TextArea",
+                    "title": "Text for back side",
+                    "default": "",
+                    "validators": [],
+                    "help": "Enter body text for back side of flipcard element"
+                  }
+                }
+              }
+            }  
+          }
+        }
+      }
+    }
+  }
+}

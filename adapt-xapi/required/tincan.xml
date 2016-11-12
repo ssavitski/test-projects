@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+    <activities>
+        <activity id="5732acc9d749346b116dc0e1" type="http://adlnet.gov/expapi">
+            <name>FDA 1.1</name>
+            <description lang="en-US">none</description>
+            <launch lang="en-us">index.html</launch>
+        </activity>
+    </activities>
+</tincan>

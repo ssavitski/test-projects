@@ -1,0 +1,26 @@
+{
+  "name": "adapt-proof-of-concept",
+  "authors": [
+    "Siarhei Savitski <siarhei.savitski@instinctools.ru>"
+  ],
+  "version": "1.0.0",
+  "framework": ">2.0.0",
+  "displayName" : "Proof of Concept",
+  "extension": "proof-of-concept",
+  "description": "An extension allows to navigate through blocks or articles using next or prev page buttons.",
+  "main": "/js/adapt-proof-of-concept.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "GPLv3",
+  "targetAttribute": "_proofOfConcept",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

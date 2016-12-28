@@ -46,7 +46,7 @@ class SearchBar extends Component {
         />
 
         <div className="input-group-btn">
-          <button type="button" className="btn btn-info">Search</button>
+          <button type="submit" className="btn btn-info">Search</button>
         </div>
       </form>
     )

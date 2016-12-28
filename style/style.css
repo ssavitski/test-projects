@@ -2,3 +2,8 @@
   vertical-align: bottom !important;
   text-align: center;
 }
+
+.google-map-container {
+  width: 250px;
+  height: 200px;
+}

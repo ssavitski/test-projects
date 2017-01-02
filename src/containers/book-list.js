@@ -32,10 +32,10 @@ const mapStateToProps = (state) => {
   return {
     books: state.books,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ selectBook }, dispatch);
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookList);

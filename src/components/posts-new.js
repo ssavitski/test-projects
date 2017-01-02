@@ -9,6 +9,12 @@ class PostsNew extends Component {
     router: PropTypes.object,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   highlightField(field) {
     return field.touched && field.invalid ? 'has-error' : '';
   }
@@ -31,7 +37,7 @@ class PostsNew extends Component {
     } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <h3>Create new Post</h3>
 
         <div className={`form-group ${this.highlightField(title)}`}>

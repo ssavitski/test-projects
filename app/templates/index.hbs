@@ -1,0 +1,11 @@
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi beatae ducimus iure nobis officia quidem. Animi aperiam aut debitis exercitationem, iusto possimus quibusdam repellendus soluta tenetur voluptatum. Esse fugiat quidem tenetur. Deserunt dolorem ex optio! Ad consequatur quia tempora!</p>
+
+<ul>
+    {{#each model as |dev|}}
+        <li>{{#link-to 'users' dev.login}}{{dev.name}}{{/link-to}}</li>
+    {{/each}}
+</ul>
+
+<button class="btn btn-success" {{action "clickMe"}}>Click me!</button>
+
+<p>{{renderedOn}}</p>

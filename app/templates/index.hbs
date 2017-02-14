@@ -2,7 +2,11 @@
 
 <ul>
     {{#each model as |dev|}}
-        <li>{{#link-to 'users' dev.login}}{{dev.name}}{{/link-to}}</li>
+        <li>
+            {{#link-to 'user' dev.login}}
+                {{dev.name}}
+            {{/link-to}}
+        </li>
     {{/each}}
 </ul>
 

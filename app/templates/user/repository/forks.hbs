@@ -1,0 +1,26 @@
+<h4>Forks</h4>
+
+<table class="table table-striped">
+    <tbody>
+    {{#each model as |fork|}}
+        <tr>
+            <td>
+                <img src="{{fork.owner.avatar_url}}" class="avatar-url" alt="{{fork.title}}">
+            </td>
+            <td>
+                {{fork.full_name}}
+                <hr>
+                <p class="text-mute">{{from-date fork.created_at}}</p>
+            </td>
+        </tr>
+    {{else}}
+        <tr>
+            <td>
+                <p class="text-muted">No forks yet</p>
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+{{outlet}}

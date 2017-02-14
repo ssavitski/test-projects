@@ -1,0 +1,12 @@
+.submenu {
+    list-style-type: none;
+}
+
+.submenu li {
+    display: inline-block;
+}
+
+.avatar-url {
+    max-width: 150px;
+    height: auto;
+}

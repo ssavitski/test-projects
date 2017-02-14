@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+    <li>
+        {{#link-to 'index'}}
+            Home
+        {{/link-to}}
+    </li>
+    <li>
+        {{#link-to 'user' user.login}}
+            {{user.name}}
+        {{/link-to}}
+    </li>
+    <li class="active">Repositories</li>
+</ul>
+
+<table class="table table-striped">
+    <tbody>
+        {{#each model as |repo|}}
+            <tr>
+                <td>
+                    {{#link-to 'user.repository' repo.name}}
+                        {{repo.name}}
+                    {{/link-to}}
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

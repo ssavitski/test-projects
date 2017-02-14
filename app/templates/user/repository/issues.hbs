@@ -1,0 +1,26 @@
+<h4>Issues</h4>
+
+<table class="table table-striped">
+    <tbody>
+    {{#each model as |issue|}}
+        <tr>
+            <td>
+                <img src="{{issue.user.avatar_url}}" class="avatar-url" alt="{{issue.title}}">
+            </td>
+            <td>
+                {{issue.title}}
+                <hr>
+                <p class="text-mute">{{from-date issue.created_at}}</p>
+            </td>
+        </tr>
+    {{else}}
+        <tr>
+            <td>
+                <p class="text-muted">No issues yet</p>
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+{{outlet}}

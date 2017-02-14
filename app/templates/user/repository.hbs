@@ -1,0 +1,43 @@
+<ul class="breadcrumb">
+    <li>
+        {{#link-to 'index'}}
+            Home
+        {{/link-to}}
+    </li>
+    <li>
+        {{#link-to 'user' user.login}}
+            {{user.name}}
+        {{/link-to}}
+    </li>
+    <li>
+        {{#link-to 'user.repositories'}}
+            Repositories
+        {{/link-to}}
+    </li>
+    <li class="active">{{model.name}}</li>
+</ul>
+
+<h1>{{model.name}}</h1>
+<p>{{model.description}}</p>
+
+<ul>
+    <li>Language: {{model.language}}</li>
+    <li>Watchers: {{model.watchers}}</li>
+    <li>Open Issues: {{model.watchers}}</li>
+    <li>Clone: {{model.clone_url}}</li>
+    <li>Web: <a href="{{model.html_url}}" target="_blank">{{model.html_url}}</a></li>
+</ul>
+
+<hr>
+{{#unless forked}}
+    <ul class="submenu">
+        <li>{{#link-to 'user.repository.issues' class="btn btn-primary"}}Issues{{/link-to}}</li>
+        <li>{{#link-to 'user.repository.forks' class="btn btn-success"}}Forks{{/link-to}}</li>
+        <li>{{#link-to 'user.repository.commits' class="btn btn-warning"}}Commits{{/link-to}}</li>
+        <li>{{#link-to 'user.repository.newissue' class="btn btn-danger"}}New Issue{{/link-to}}</li>
+    </ul>
+{{else}}
+    <p class="text-muted">Forked {{from-date model.created_at}}</p>
+{{/unless}}
+
+{{outlet}}
